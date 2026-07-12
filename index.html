@@ -949,6 +949,123 @@
                 loadAllData();
             }
         });
+        // ============================================================
+// 11. ÇAT (SÖHBET) FUNKSIÝALARY
+// ============================================================
+
+// Ähli çatlar we olaryň soňky habary
+async function loadChats() {
+  if (!currentUser) return [];
+  const { data, error } = await supabase
+    .from('chats')
+    .select(`
+      id,
+      type,
+      name,
+      chat_participants!inner(user_id),
+      messages(
+        id,
+        content,
+        created_at,
+        sender_id
+      )
+    `)
+    .eq('chat_participants.user_id', currentUser.id)
+    .order('created_at', { foreignTable: 'messages', ascending: false })
+    .limit(1, { foreignTable: 'messages' });
+
+  if (error) {
+    console.error('Çatlar ýüklenmedi:', error);
+    return [];
+  }
+  return data;
+}
+
+// Bellenen çatdaky habarlary almak
+async function loadMessages(chatId) {
+  const { data, error } = await supabase
+    .from('messages')
+    .select('*, sender:users!sender_id(email, user_metadata)')
+    .eq('chat_id', chatId)
+    .order('created_at', { ascending: true });
+
+  if (error) {
+    console.error('Habarlar ýüklenmedi:', error);
+    return [];
+  }
+  return data;
+}
+
+// Täze habar ibermek
+async function sendMessage(chatId, content) {
+  if (!currentUser) return;
+  const { data, error } = await supabase
+    .from('messages')
+    .insert([{ chat_id: chatId, sender_id: currentUser.id, content }])
+    .select();
+  if (error) console.error('Habar iberilmedi:', error);
+  return data;
+}
+
+// Täze şahsy çat açmak (eğer ýok bolsa)
+async function getOrCreatePersonalChat(otherUserId) {
+  // Öň bar bolan çaty gözle
+  const { data: existing, error } = await supabase
+    .from('chat_participants')
+    .select('chat_id')
+    .eq('user_id', currentUser.id)
+    .filter('chat_id', 'in', 
+      supabase.from('chat_participants')
+        .select('chat_id')
+        .eq('user_id', otherUserId)
+        .filter('chat_id', 'in',
+          supabase.from('chats')
+            .select('id')
+            .eq('type', 'personal')
+        )
+    );
+
+  if (existing && existing.length > 0) {
+    return existing[0].chat_id;
+  }
+
+  // Täze çat döret
+  const { data: newChat, error: chatError } = await supabase
+    .from('chats')
+    .insert([{ type: 'personal' }])
+    .select()
+    .single();
+
+  if (chatError) throw chatError;
+
+  // Gatnaşyjylary goş
+  await supabase.from('chat_participants').insert([
+    { chat_id: newChat.id, user_id: currentUser.id },
+    { chat_id: newChat.id, user_id: otherUserId }
+  ]);
+
+  return newChat.id;
+}
+
+// Realtime abuna ýazylmak (habarlar üçin)
+function subscribeToMessages(chatId, onNewMessage) {
+  const channel = supabase.channel(`chat-${chatId}`);
+  channel
+    .on(
+      'postgres_changes',
+      {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'messages',
+        filter: `chat_id=eq.${chatId}`
+      },
+      (payload) => {
+        onNewMessage(payload.new);
+      }
+    )
+    .subscribe();
+  return channel;
+}
     </script>
 </body>
 
