@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="tk">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klassdaşlar - 2005</title>
+    <title>Klassdaşlar - 2000</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
     </script>
     <style>
@@ -12,6 +13,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
             background: #f5f7fa;
@@ -19,20 +21,24 @@
             transition: background 0.3s, color 0.3s;
             line-height: 1.6;
         }
+
         body.dark {
             background: #0f172a;
             color: #e2e8f0;
         }
+
         a {
             color: #3b82f6;
             text-decoration: none;
             cursor: pointer;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
+
         header {
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -42,42 +48,51 @@
             padding: 10px 0;
             transition: background 0.3s;
         }
+
         body.dark header {
             background: #1e293b;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
+
         header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
         }
+
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
             color: #3b82f6;
         }
+
         .logo span {
             color: #f59e0b;
         }
+
         nav {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
             gap: 8px 15px;
         }
+
         nav a {
             font-weight: 500;
             color: #1e293b;
             transition: color 0.2s;
             cursor: pointer;
         }
+
         body.dark nav a {
             color: #cbd5e1;
         }
+
         nav a:hover {
             color: #3b82f6;
         }
+
         .theme-toggle {
             background: none;
             border: none;
@@ -86,14 +101,17 @@
             color: #1e293b;
             padding: 0 5px;
         }
+
         body.dark .theme-toggle {
             color: #facc15;
         }
+
         .user-menu {
             display: flex;
             align-items: center;
             gap: 10px;
         }
+
         .user-menu .avatar-small {
             width: 35px;
             height: 35px;
@@ -101,22 +119,27 @@
             object-fit: cover;
             border: 2px solid #3b82f6;
         }
+
         section {
             padding: 60px 0;
             border-bottom: 1px solid #e2e8f0;
         }
+
         body.dark section {
             border-color: #334155;
         }
+
         section:last-child {
             border: none;
         }
+
         h2 {
             font-size: 2.2rem;
             margin-bottom: 30px;
             position: relative;
             display: inline-block;
         }
+
         h2::after {
             content: '';
             position: absolute;
@@ -127,6 +150,7 @@
             background: #3b82f6;
             border-radius: 2px;
         }
+
         .hero {
             text-align: center;
             padding: 60px 0 40px;
@@ -134,21 +158,26 @@
             border-radius: 20px;
             margin-top: 20px;
         }
+
         body.dark .hero {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         }
+
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 10px;
         }
+
         .hero .sub {
             font-size: 1.3rem;
             color: #64748b;
             margin-bottom: 20px;
         }
+
         body.dark .hero .sub {
             color: #94a3b8;
         }
+
         .hero .stats {
             display: flex;
             justify-content: center;
@@ -156,6 +185,7 @@
             flex-wrap: wrap;
             margin-top: 30px;
         }
+
         .hero .stats div {
             background: white;
             padding: 20px 30px;
@@ -163,21 +193,25 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             min-width: 120px;
         }
+
         body.dark .hero .stats div {
             background: #1e293b;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
+
         .hero .stats .number {
             font-size: 2rem;
             font-weight: 700;
             color: #3b82f6;
         }
+
         .classmates-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 30px;
             margin-top: 20px;
         }
+
         .card {
             background: white;
             border-radius: 16px;
@@ -186,14 +220,17 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s, box-shadow 0.2s;
         }
+
         body.dark .card {
             background: #1e293b;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
+
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
+
         .card img {
             width: 100px;
             height: 100px;
@@ -202,21 +239,26 @@
             margin-bottom: 10px;
             border: 3px solid #3b82f6;
         }
+
         .card h3 {
             font-size: 1.1rem;
         }
+
         .card .city {
             color: #64748b;
             font-size: 0.9rem;
         }
+
         body.dark .card .city {
             color: #94a3b8;
         }
+
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 15px;
         }
+
         .gallery img {
             width: 100%;
             height: 180px;
@@ -225,14 +267,17 @@
             transition: transform 0.3s;
             cursor: pointer;
         }
+
         .gallery img:hover {
             transform: scale(1.03);
         }
+
         .event-list {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
+
         .event-item {
             background: white;
             padding: 20px 25px;
@@ -243,18 +288,22 @@
             flex-wrap: wrap;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
         }
+
         body.dark .event-item {
             background: #1e293b;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
+
         .event-item .date {
             font-weight: 600;
             color: #3b82f6;
         }
+
         .event-item .desc {
             flex: 1;
             margin: 0 15px;
         }
+
         .modal {
             display: none;
             position: fixed;
@@ -267,9 +316,11 @@
             align-items: center;
             z-index: 999;
         }
+
         .modal.active {
             display: flex;
         }
+
         .modal-content {
             background: white;
             padding: 30px;
@@ -280,9 +331,11 @@
             max-height: 90vh;
             overflow-y: auto;
         }
+
         body.dark .modal-content {
             background: #1e293b;
         }
+
         .modal-close {
             position: absolute;
             top: 15px;
@@ -293,10 +346,12 @@
             border: none;
             color: inherit;
         }
+
         .modal-content h2 {
             font-size: 1.8rem;
             margin-bottom: 20px;
         }
+
         .modal-content input,
         .modal-content textarea {
             width: 100%;
@@ -308,17 +363,20 @@
             background: white;
             transition: border 0.2s;
         }
+
         body.dark .modal-content input,
         body.dark .modal-content textarea {
             background: #1e293b;
             border-color: #475569;
             color: #e2e8f0;
         }
+
         .modal-content input:focus,
         .modal-content textarea:focus {
             outline: none;
             border-color: #3b82f6;
         }
+
         .modal-content button {
             background: #3b82f6;
             color: white;
@@ -332,21 +390,25 @@
             width: 100%;
             margin-bottom: 8px;
         }
+
         .modal-content button:hover {
             background: #2563eb;
         }
+
         .modal-content .switch-link {
             text-align: center;
             margin-top: 15px;
             cursor: pointer;
             color: #3b82f6;
         }
+
         .modal-content .avatar-upload {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-bottom: 15px;
         }
+
         .modal-content .avatar-upload img {
             width: 100px;
             height: 100px;
@@ -355,55 +417,68 @@
             border: 3px solid #3b82f6;
             margin-bottom: 10px;
         }
+
         .error-msg {
             color: #ef4444;
             font-size: 0.9rem;
             margin-bottom: 10px;
             text-align: center;
         }
+
         footer {
             background: white;
             padding: 30px 0;
             text-align: center;
             border-top: 1px solid #e2e8f0;
         }
+
         body.dark footer {
             background: #1e293b;
             border-color: #334155;
         }
+
         @media (max-width: 768px) {
             .logo {
                 font-size: 1.4rem;
             }
+
             nav {
                 gap: 5px 10px;
             }
+
             .hero h1 {
                 font-size: 2.2rem;
             }
+
             .hero .stats {
                 gap: 15px;
             }
+
             .hero .stats div {
                 padding: 15px;
                 min-width: 80px;
             }
+
             .classmates-grid {
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
+
             .gallery {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
+
             .event-item {
                 flex-direction: column;
                 align-items: flex-start;
             }
+
             .event-item .desc {
                 margin: 8px 0;
             }
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -445,7 +520,8 @@
 
         <section id="classmates">
             <h2>Klassdaşlar</h2>
-            <input type="text" id="searchInput" placeholder="Ady boýunça gözleg..." style="width:100%; max-width:300px; padding:10px 15px; border-radius:30px; border:1px solid #cbd5e1; margin-bottom:20px;">
+            <input type="text" id="searchInput" placeholder="Ady boýunça gözleg..."
+                style="width:100%; max-width:300px; padding:10px 15px; border-radius:30px; border:1px solid #cbd5e1; margin-bottom:20px;">
             <div class="classmates-grid" id="classmatesGrid"></div>
         </section>
 
@@ -521,8 +597,8 @@
         // ============================================================
         // 1. ПОДКЛЮЧЕНИЕ К SUPABASE - ВСТАВЬТЕ СВОИ ДАННЫЕ!
         // ============================================================
-        var SUPABASE_URL = https://syhnwvbntohjjnkxsvno.supabase.co/rest/v1/; // ЗАМЕНИТЕ
-        var SUPABASE_ANON_KEY = sb_publishable__Zo8aDJcJlLSvQVd3ZTacQ_mEHRFuD2; // ЗАМЕНИТЕ
+        var SUPABASE_URL = "https://syhnwvbntohjjnkxsvno.supabase.co/rest/v1/"; // ЗАМЕНИТЕ
+        var SUPABASE_ANON_KEY = 'sb_publishable__Zo8aDJcJlLSvQVd3ZTacQ_mEHRFuD2'; // ЗАМЕНИТЕ
 
         if (SUPABASE_URL === 'https://syhnwvbntohjjnkxsvno.supabase.co/rest/v1/' || SUPABASE_ANON_KEY === 'sb_publishable__Zo8aDJcJlLSvQVd3ZTacQ_mEHRFuD2') {
             console.warn('ВНИМАНИЕ: Вы не заменили SUPABASE_URL и SUPABASE_ANON_KEY на свои!');
@@ -541,12 +617,12 @@
         // ============================================================
         // 3. РАБОТА С МОДАЛЬНЫМИ ОКНАМИ
         // ============================================================
-        window.openModal = function(id) {
+        window.openModal = function (id) {
             var el = document.getElementById(id);
             if (el) el.classList.add('active');
         };
 
-        window.closeModal = function(id) {
+        window.closeModal = function (id) {
             var el = document.getElementById(id);
             if (el) el.classList.remove('active');
             var errs = el ? el.querySelectorAll('.error-msg') : [];
@@ -555,14 +631,14 @@
             }
         };
 
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (e.target.classList.contains('modal')) {
                 e.target.classList.remove('active');
             }
         });
 
-        document.querySelectorAll('.modal-close').forEach(function(btn) {
-            btn.addEventListener('click', function() {
+        document.querySelectorAll('.modal-close').forEach(function (btn) {
+            btn.addEventListener('click', function () {
                 var modalId = this.getAttribute('data-modal');
                 closeModal(modalId);
             });
@@ -774,10 +850,10 @@
         function renderClassmates() {
             var grid = document.getElementById('classmatesGrid');
             var search = document.getElementById('searchInput').value.toLowerCase();
-            var filtered = allClassmates.filter(function(c) {
+            var filtered = allClassmates.filter(function (c) {
                 return c.name.toLowerCase().includes(search);
             });
-            grid.innerHTML = filtered.map(function(c) {
+            grid.innerHTML = filtered.map(function (c) {
                 return '<div class="card">' +
                     '<img src="' + (c.img || 'https://i.pravatar.cc/150?img=10') + '" alt="' + c.name + '">' +
                     '<h3>' + c.name + '</h3>' +
@@ -789,11 +865,11 @@
 
         function renderGallery() {
             var grid = document.getElementById('galleryGrid');
-            grid.innerHTML = allPhotos.map(function(p) {
+            grid.innerHTML = allPhotos.map(function (p) {
                 return '<img src="' + p.url + '" alt="Surat" data-photo="' + p.url + '" class="gallery-img">';
             }).join('');
-            document.querySelectorAll('.gallery-img').forEach(function(img) {
-                img.addEventListener('click', function() {
+            document.querySelectorAll('.gallery-img').forEach(function (img) {
+                img.addEventListener('click', function () {
                     var src = this.getAttribute('data-photo');
                     document.getElementById('modalImg').src = src;
                     openModal('photoModal');
@@ -803,7 +879,7 @@
 
         function renderEvents() {
             var list = document.getElementById('eventList');
-            list.innerHTML = allEvents.map(function(e) {
+            list.innerHTML = allEvents.map(function (e) {
                 return '<div class="event-item">' +
                     '<span class="date">' + e.date + '</span>' +
                     '<span class="desc">' + e.description + '</span>' +
@@ -828,30 +904,30 @@
         // 9. ПРИВЯЗКА СОБЫТИЙ
         // ============================================================
 
-        document.getElementById('loginLink').addEventListener('click', function() { openModal('loginModal'); });
-        document.getElementById('registerLink').addEventListener('click', function() { openModal('registerModal'); });
-        document.getElementById('profileLink').addEventListener('click', function() { openModal('profileModal'); });
+        document.getElementById('loginLink').addEventListener('click', function () { openModal('loginModal'); });
+        document.getElementById('registerLink').addEventListener('click', function () { openModal('registerModal'); });
+        document.getElementById('profileLink').addEventListener('click', function () { openModal('profileModal'); });
         document.getElementById('logoutLink').addEventListener('click', logoutUser);
         document.getElementById('logoutProfileBtn').addEventListener('click', logoutUser);
 
-        document.getElementById('switchToLogin').addEventListener('click', function() {
+        document.getElementById('switchToLogin').addEventListener('click', function () {
             closeModal('registerModal');
             openModal('loginModal');
         });
-        document.getElementById('switchToRegister').addEventListener('click', function() {
+        document.getElementById('switchToRegister').addEventListener('click', function () {
             closeModal('loginModal');
             openModal('registerModal');
         });
 
         document.getElementById('registerBtn').addEventListener('click', registerUser);
-        document.getElementById('loginBtn').addEventListener('click', function() { loginUser(); });
+        document.getElementById('loginBtn').addEventListener('click', function () { loginUser(); });
         document.getElementById('updateProfileBtn').addEventListener('click', updateProfile);
 
         // ============================================================
         // 10. ЗАПУСК
         // ============================================================
 
-        supabase.auth.getSession().then(function(result) {
+        supabase.auth.getSession().then(function (result) {
             var session = result.data.session;
             if (session && session.user) {
                 loadUserProfile();
@@ -862,7 +938,7 @@
             }
         });
 
-        supabase.auth.onAuthStateChange(function(event, session) {
+        supabase.auth.onAuthStateChange(function (event, session) {
             if (event === 'SIGNED_IN' && session && session.user) {
                 loadUserProfile();
             }
@@ -875,4 +951,5 @@
         });
     </script>
 </body>
+
 </html>
