@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="tk">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +7,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
     </script>
     <style>
+        /* (stiller öňki ýaly, hiç zat üýtgemedi) */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
             background: #f5f7fa;
@@ -21,24 +20,20 @@
             transition: background 0.3s, color 0.3s;
             line-height: 1.6;
         }
-
         body.dark {
             background: #0f172a;
             color: #e2e8f0;
         }
-
         a {
             color: #3b82f6;
             text-decoration: none;
             cursor: pointer;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-
         header {
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -48,51 +43,42 @@
             padding: 10px 0;
             transition: background 0.3s;
         }
-
         body.dark header {
             background: #1e293b;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
-
         header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
         }
-
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
             color: #3b82f6;
         }
-
         .logo span {
             color: #f59e0b;
         }
-
         nav {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
             gap: 8px 15px;
         }
-
         nav a {
             font-weight: 500;
             color: #1e293b;
             transition: color 0.2s;
             cursor: pointer;
         }
-
         body.dark nav a {
             color: #cbd5e1;
         }
-
         nav a:hover {
             color: #3b82f6;
         }
-
         .theme-toggle {
             background: none;
             border: none;
@@ -101,17 +87,14 @@
             color: #1e293b;
             padding: 0 5px;
         }
-
         body.dark .theme-toggle {
             color: #facc15;
         }
-
         .user-menu {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
         .user-menu .avatar-small {
             width: 35px;
             height: 35px;
@@ -119,27 +102,22 @@
             object-fit: cover;
             border: 2px solid #3b82f6;
         }
-
         section {
             padding: 60px 0;
             border-bottom: 1px solid #e2e8f0;
         }
-
         body.dark section {
             border-color: #334155;
         }
-
         section:last-child {
             border: none;
         }
-
         h2 {
             font-size: 2.2rem;
             margin-bottom: 30px;
             position: relative;
             display: inline-block;
         }
-
         h2::after {
             content: '';
             position: absolute;
@@ -150,7 +128,6 @@
             background: #3b82f6;
             border-radius: 2px;
         }
-
         .hero {
             text-align: center;
             padding: 60px 0 40px;
@@ -158,26 +135,21 @@
             border-radius: 20px;
             margin-top: 20px;
         }
-
         body.dark .hero {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
         }
-
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 10px;
         }
-
         .hero .sub {
             font-size: 1.3rem;
             color: #64748b;
             margin-bottom: 20px;
         }
-
         body.dark .hero .sub {
             color: #94a3b8;
         }
-
         .hero .stats {
             display: flex;
             justify-content: center;
@@ -185,7 +157,6 @@
             flex-wrap: wrap;
             margin-top: 30px;
         }
-
         .hero .stats div {
             background: white;
             padding: 20px 30px;
@@ -193,25 +164,21 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             min-width: 120px;
         }
-
         body.dark .hero .stats div {
             background: #1e293b;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-
         .hero .stats .number {
             font-size: 2rem;
             font-weight: 700;
             color: #3b82f6;
         }
-
         .classmates-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 30px;
             margin-top: 20px;
         }
-
         .card {
             background: white;
             border-radius: 16px;
@@ -220,17 +187,14 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s, box-shadow 0.2s;
         }
-
         body.dark .card {
             background: #1e293b;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
-
         .card img {
             width: 100px;
             height: 100px;
@@ -239,26 +203,21 @@
             margin-bottom: 10px;
             border: 3px solid #3b82f6;
         }
-
         .card h3 {
             font-size: 1.1rem;
         }
-
         .card .city {
             color: #64748b;
             font-size: 0.9rem;
         }
-
         body.dark .card .city {
             color: #94a3b8;
         }
-
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 15px;
         }
-
         .gallery img {
             width: 100%;
             height: 180px;
@@ -267,17 +226,14 @@
             transition: transform 0.3s;
             cursor: pointer;
         }
-
         .gallery img:hover {
             transform: scale(1.03);
         }
-
         .event-list {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
-
         .event-item {
             background: white;
             padding: 20px 25px;
@@ -288,22 +244,18 @@
             flex-wrap: wrap;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
         }
-
         body.dark .event-item {
             background: #1e293b;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
-
         .event-item .date {
             font-weight: 600;
             color: #3b82f6;
         }
-
         .event-item .desc {
             flex: 1;
             margin: 0 15px;
         }
-
         .modal {
             display: none;
             position: fixed;
@@ -316,11 +268,9 @@
             align-items: center;
             z-index: 999;
         }
-
         .modal.active {
             display: flex;
         }
-
         .modal-content {
             background: white;
             padding: 30px;
@@ -331,11 +281,9 @@
             max-height: 90vh;
             overflow-y: auto;
         }
-
         body.dark .modal-content {
             background: #1e293b;
         }
-
         .modal-close {
             position: absolute;
             top: 15px;
@@ -346,12 +294,10 @@
             border: none;
             color: inherit;
         }
-
         .modal-content h2 {
             font-size: 1.8rem;
             margin-bottom: 20px;
         }
-
         .modal-content input,
         .modal-content textarea {
             width: 100%;
@@ -363,20 +309,17 @@
             background: white;
             transition: border 0.2s;
         }
-
         body.dark .modal-content input,
         body.dark .modal-content textarea {
             background: #1e293b;
             border-color: #475569;
             color: #e2e8f0;
         }
-
         .modal-content input:focus,
         .modal-content textarea:focus {
             outline: none;
             border-color: #3b82f6;
         }
-
         .modal-content button {
             background: #3b82f6;
             color: white;
@@ -390,25 +333,21 @@
             width: 100%;
             margin-bottom: 8px;
         }
-
         .modal-content button:hover {
             background: #2563eb;
         }
-
         .modal-content .switch-link {
             text-align: center;
             margin-top: 15px;
             cursor: pointer;
             color: #3b82f6;
         }
-
         .modal-content .avatar-upload {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-bottom: 15px;
         }
-
         .modal-content .avatar-upload img {
             width: 100px;
             height: 100px;
@@ -417,68 +356,88 @@
             border: 3px solid #3b82f6;
             margin-bottom: 10px;
         }
-
         .error-msg {
             color: #ef4444;
             font-size: 0.9rem;
             margin-bottom: 10px;
             text-align: center;
         }
-
         footer {
             background: white;
             padding: 30px 0;
             text-align: center;
             border-top: 1px solid #e2e8f0;
         }
-
         body.dark footer {
             background: #1e293b;
             border-color: #334155;
         }
-
         @media (max-width: 768px) {
             .logo {
                 font-size: 1.4rem;
             }
-
             nav {
                 gap: 5px 10px;
             }
-
             .hero h1 {
                 font-size: 2.2rem;
             }
-
             .hero .stats {
                 gap: 15px;
             }
-
             .hero .stats div {
                 padding: 15px;
                 min-width: 80px;
             }
-
             .classmates-grid {
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
-
             .gallery {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
-
             .event-item {
                 flex-direction: column;
                 align-items: flex-start;
             }
-
             .event-item .desc {
                 margin: 8px 0;
             }
         }
+        .btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn:hover {
+            background: #2563eb;
+        }
+        .btn-danger {
+            background: #ef4444;
+        }
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+        .chat-item {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        body.dark .chat-item {
+            border-color: #334155;
+        }
+        .chat-item:hover {
+            background: #f1f5f9;
+        }
+        body.dark .chat-item:hover {
+            background: #1e293b;
+        }
     </style>
 </head>
-
 <body>
 
     <header>
@@ -489,6 +448,8 @@
                 <a href="#classmates">Klassdaşlar</a>
                 <a href="#gallery">Suratlar</a>
                 <a href="#events">Çäreler</a>
+                <!-- Täze "Söhbet" düwmesi -->
+                <a id="chatLink">Söhbet</a>
                 <span id="authLinks">
                     <a id="loginLink">Giriş</a>
                     <a id="registerLink">Hasaba alyş</a>
@@ -517,29 +478,7 @@
                 <div><span class="number" id="countPhotos">0</span><br>Surat</div>
             </div>
         </section>
-<!-- Çat modal -->
-<div class="modal" id="chatModal">
-  <div class="modal-content" style="max-width:700px;">
-    <button class="modal-close" data-modal="chatModal">&times;</button>
-    <h2>Söhbet</h2>
-    <div style="display:flex; gap:15px; height:400px;">
-      <!-- Çatlar sanawy -->
-      <div style="width:30%; border-right:1px solid #ccc; overflow-y:auto;" id="chatList">
-        <p>Ýüklenýär...</p>
-      </div>
-      <!-- Habarlar penjiresi -->
-      <div style="flex:1; display:flex; flex-direction:column;">
-        <div style="flex:1; overflow-y:auto; padding:10px;" id="messageArea">
-          <p>Çat saýlaň</p>
-        </div>
-        <div style="display:flex; gap:5px; margin-top:10px;">
-          <input type="text" id="messageInput" placeholder="Habaryňyzy ýazyň..." style="flex:1;">
-          <button id="sendMessageBtn" class="btn">Iber</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
         <section id="classmates">
             <h2>Klassdaşlar</h2>
             <input type="text" id="searchInput" placeholder="Ady boýunça gözleg..."
@@ -564,7 +503,7 @@
         </div>
     </footer>
 
-    <!-- Модалки -->
+    <!-- ===== МОДАЛКИ ===== -->
     <div class="modal" id="registerModal">
         <div class="modal-content">
             <button class="modal-close" data-modal="registerModal">&times;</button>
@@ -615,21 +554,38 @@
         </div>
     </div>
 
+    <!-- Çat modal -->
+    <div class="modal" id="chatModal">
+        <div class="modal-content" style="max-width:700px;">
+            <button class="modal-close" data-modal="chatModal">&times;</button>
+            <h2>Söhbet</h2>
+            <div style="display:flex; gap:15px; height:400px;">
+                <div style="width:30%; border-right:1px solid #ccc; overflow-y:auto;" id="chatList">
+                    <p>Ýüklenýär...</p>
+                </div>
+                <div style="flex:1; display:flex; flex-direction:column;">
+                    <div style="flex:1; overflow-y:auto; padding:10px;" id="messageArea">
+                        <p>Çat saýlaň</p>
+                    </div>
+                    <div style="display:flex; gap:5px; margin-top:10px;">
+                        <input type="text" id="messageInput" placeholder="Habaryňyzy ýazyň..." style="flex:1;">
+                        <button id="sendMessageBtn" class="btn">Iber</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ============================================================
-        // 1. ПОДКЛЮЧЕНИЕ К SUPABASE - ВСТАВЬТЕ СВОИ ДАННЫЕ!
+        // 1. SUPABASE BAGLANYŞY
         // ============================================================
-        var SUPABASE_URL = "https://syhnwvbntohjjnkxsvno.supabase.co"; // ЗАМЕНИТЕ
-        var SUPABASE_ANON_KEY = 'sb_publishable__Zo8aDJcJlLSvQVd3ZTacQ_mEHRFuD2'; // ЗАМЕНИТЕ
-
-        if (SUPABASE_URL === 'https://syhnwvbntohjjnkxsvno.supabase.co' || SUPABASE_ANON_KEY === 'sb_publishable__Zo8aDJcJlLSvQVd3ZTacQ_mEHRFuD2') {
-            console.warn('ВНИМАНИЕ: Вы не заменили SUPABASE_URL и SUPABASE_ANON_KEY на свои!');
-        }
-
+        var SUPABASE_URL = "https://syhnwvbntohjjnkxsvno.supabase.co";
+        var SUPABASE_ANON_KEY = 'sb_publishable__Zo8aDJcJlLSvQVd3ZTacQ_mEHRFuD2';
         var supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // ============================================================
-        // 2. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
+        // 2. GLOBAL ÜÝTGEMELER
         // ============================================================
         var currentUser = null;
         var allClassmates = [];
@@ -637,65 +593,50 @@
         var allEvents = [];
 
         // ============================================================
-        // 3. РАБОТА С МОДАЛЬНЫМИ ОКНАМИ
+        // 3. MODAL IŞLEMLER
         // ============================================================
-        window.openModal = function (id) {
+        window.openModal = function(id) {
             var el = document.getElementById(id);
             if (el) el.classList.add('active');
         };
-
-        window.closeModal = function (id) {
+        window.closeModal = function(id) {
             var el = document.getElementById(id);
             if (el) el.classList.remove('active');
             var errs = el ? el.querySelectorAll('.error-msg') : [];
-            for (var i = 0; i < errs.length; i++) {
-                errs[i].textContent = '';
-            }
+            for (var i = 0; i < errs.length; i++) errs[i].textContent = '';
         };
-
-        document.addEventListener('click', function (e) {
-            if (e.target.classList.contains('modal')) {
-                e.target.classList.remove('active');
-            }
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) e.target.classList.remove('active');
         });
-
-        document.querySelectorAll('.modal-close').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var modalId = this.getAttribute('data-modal');
-                closeModal(modalId);
+        document.querySelectorAll('.modal-close').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                closeModal(this.getAttribute('data-modal'));
             });
         });
 
         // ============================================================
-        // 4. АУТЕНТИФИКАЦИЯ
+        // 4. AUTH
         // ============================================================
-
         async function registerUser() {
             var fullName = document.getElementById('regFullName').value.trim();
             var email = document.getElementById('regEmail').value.trim();
             var password = document.getElementById('regPassword').value;
             var errorDiv = document.getElementById('registerError');
-
             errorDiv.textContent = '';
             if (!fullName || !email || password.length < 6) {
                 errorDiv.textContent = 'Ähli meýdançalary dolduryň we parol 6 harpdan uzyn bolmaly.';
                 return;
             }
-
             var result = await supabase.auth.signUp({
                 email: email,
                 password: password,
-                options: {
-                    data: { full_name: fullName }
-                }
+                options: { data: { full_name: fullName } }
             });
-
             if (result.error) {
                 errorDiv.textContent = 'Ýalňyşlyk: ' + result.error.message;
                 return;
             }
-
-            alert('Tassyklama haty e-poçtaňyza iberildi! (ýa-da girip bilersiňiz)');
+            alert('Tassyklama haty e-poçtaňyza iberildi!');
             closeModal('registerModal');
             await loginUser(email, password);
         }
@@ -711,14 +652,11 @@
                 errorDiv.textContent = 'E-poçta we paroly giriziň.';
                 return;
             }
-
             var result = await supabase.auth.signInWithPassword({ email: email, password: password });
-
             if (result.error) {
                 errorDiv.textContent = 'Giriş ýalňyş: ' + result.error.message;
                 return;
             }
-
             closeModal('loginModal');
             await loadUserProfile();
         }
@@ -733,51 +671,38 @@
         }
 
         // ============================================================
-        // 5. ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ
+        // 5. PROFIL
         // ============================================================
-
         async function loadUserProfile() {
             var result = await supabase.auth.getUser();
             var user = result.data.user;
-            var error = result.error;
-
-            if (error || !user) {
+            if (result.error || !user) {
                 document.getElementById('authLinks').style.display = 'inline';
                 document.getElementById('userMenu').style.display = 'none';
                 return;
             }
-
             currentUser = user;
             document.getElementById('authLinks').style.display = 'none';
             document.getElementById('userMenu').style.display = 'flex';
 
-            var profileResult = await supabase
-                .from('profiles')
-                .select('*')
-                .eq('id', user.id)
-                .single();
-
+            var profileResult = await supabase.from('profiles').select('*').eq('id', user.id).single();
             var fullName = user.user_metadata?.full_name || user.email;
             var avatarUrl = 'https://i.pravatar.cc/150?img=11';
-            var city = '';
-            var job = '';
-
+            var city = '',
+                job = '';
             if (!profileResult.error && profileResult.data) {
                 fullName = profileResult.data.full_name || fullName;
                 avatarUrl = profileResult.data.avatar_url || avatarUrl;
                 city = profileResult.data.city || '';
                 job = profileResult.data.job || '';
             }
-
             document.getElementById('headerName').textContent = fullName.split(' ')[0];
             document.getElementById('headerAvatar').src = avatarUrl;
-
             document.getElementById('profileFullName').value = fullName;
             document.getElementById('profileCity').value = city;
             document.getElementById('profileJob').value = job;
             document.getElementById('profileAvatar').src = avatarUrl;
             document.getElementById('avatarUrlInput').value = avatarUrl;
-
             loadAllData();
         }
 
@@ -785,57 +710,42 @@
             if (!currentUser) return;
             var errorDiv = document.getElementById('profileError');
             errorDiv.textContent = '';
-
             var fullName = document.getElementById('profileFullName').value.trim();
             var city = document.getElementById('profileCity').value.trim();
             var job = document.getElementById('profileJob').value.trim();
             var avatarUrl = document.getElementById('avatarUrlInput').value.trim();
-
             if (!fullName) {
                 errorDiv.textContent = 'Ady girizmeli!';
                 return;
             }
-
-            var result = await supabase
-                .from('profiles')
-                .upsert({
-                    id: currentUser.id,
-                    full_name: fullName,
-                    city: city,
-                    job: job,
-                    avatar_url: avatarUrl,
-                    updated_at: new Date()
-                }, { onConflict: 'id' });
-
+            var result = await supabase.from('profiles').upsert({
+                id: currentUser.id,
+                full_name: fullName,
+                city: city,
+                job: job,
+                avatar_url: avatarUrl,
+                updated_at: new Date()
+            }, { onConflict: 'id' });
             if (result.error) {
                 errorDiv.textContent = 'Saklap bolmady: ' + result.error.message;
                 return;
             }
-
-            await supabase.auth.updateUser({
-                data: { full_name: fullName }
-            });
-
+            await supabase.auth.updateUser({ data: { full_name: fullName } });
             alert('Profil täzelendi!');
             await loadUserProfile();
         }
 
         // ============================================================
-        // 6. ЗАГРУЗКА ДАННЫХ
+        // 6. MAGLUMAT ÝÜKLEMEK
         // ============================================================
-
         async function loadAllData() {
-            await Promise.all([
-                loadClassmates(),
-                loadPhotos(),
-                loadEvents()
-            ]);
+            await Promise.all([loadClassmates(), loadPhotos(), loadEvents()]);
         }
 
         async function loadClassmates() {
             var result = await supabase.from('classmates').select('*');
             if (result.error) {
-                console.error('Ошибка загрузки одноклассников:', result.error);
+                console.error('Klassdaşlar ýüklenmedi:', result.error);
                 return;
             }
             allClassmates = result.data || [];
@@ -846,7 +756,7 @@
         async function loadPhotos() {
             var result = await supabase.from('photos').select('*');
             if (result.error) {
-                console.error('Ошибка загрузки фото:', result.error);
+                console.error('Suratlar ýüklenmedi:', result.error);
                 return;
             }
             allPhotos = result.data || [];
@@ -857,7 +767,7 @@
         async function loadEvents() {
             var result = await supabase.from('events').select('*');
             if (result.error) {
-                console.error('Ошибка загрузки событий:', result.error);
+                console.error('Çäreler ýüklenmedi:', result.error);
                 return;
             }
             allEvents = result.data || [];
@@ -866,34 +776,37 @@
         }
 
         // ============================================================
-        // 7. ОТРИСОВКА
+        // 7. GÖRKEZMELER
         // ============================================================
-
         function renderClassmates() {
             var grid = document.getElementById('classmatesGrid');
             var search = document.getElementById('searchInput').value.toLowerCase();
-            var filtered = allClassmates.filter(function (c) {
+            var filtered = allClassmates.filter(function(c) {
                 return c.name.toLowerCase().includes(search);
             });
-            grid.innerHTML = filtered.map(function (c) {
+            grid.innerHTML = filtered.map(function(c) {
+                var chatBtn = '';
+                if (currentUser) {
+                    chatBtn = '<button class="btn" style="margin-top:10px; padding:5px 15px; font-size:0.8rem;" onclick="startPersonalChat(\'' + c.email + '\')">Habarlaş</button>';
+                }
                 return '<div class="card">' +
                     '<img src="' + (c.img || 'https://i.pravatar.cc/150?img=10') + '" alt="' + c.name + '">' +
                     '<h3>' + c.name + '</h3>' +
                     '<div class="city">' + (c.city || '') + '</div>' +
                     '<small>' + (c.job || '') + '</small>' +
+                    chatBtn +
                     '</div>';
             }).join('');
         }
 
         function renderGallery() {
             var grid = document.getElementById('galleryGrid');
-            grid.innerHTML = allPhotos.map(function (p) {
+            grid.innerHTML = allPhotos.map(function(p) {
                 return '<img src="' + p.url + '" alt="Surat" data-photo="' + p.url + '" class="gallery-img">';
             }).join('');
-            document.querySelectorAll('.gallery-img').forEach(function (img) {
-                img.addEventListener('click', function () {
-                    var src = this.getAttribute('data-photo');
-                    document.getElementById('modalImg').src = src;
+            document.querySelectorAll('.gallery-img').forEach(function(img) {
+                img.addEventListener('click', function() {
+                    document.getElementById('modalImg').src = this.getAttribute('data-photo');
                     openModal('photoModal');
                 });
             });
@@ -901,7 +814,7 @@
 
         function renderEvents() {
             var list = document.getElementById('eventList');
-            list.innerHTML = allEvents.map(function (e) {
+            list.innerHTML = allEvents.map(function(e) {
                 return '<div class="event-item">' +
                     '<span class="date">' + e.date + '</span>' +
                     '<span class="desc">' + e.description + '</span>' +
@@ -910,46 +823,308 @@
         }
 
         // ============================================================
-        // 8. ПОИСК, ТЕМА
+        // 8. GÖZLEG WE TEMA
         // ============================================================
-
         document.getElementById('searchInput').addEventListener('input', renderClassmates);
 
         function toggleTheme() {
             document.body.classList.toggle('dark');
-            var btn = document.getElementById('themeToggle');
-            btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+            document.getElementById('themeToggle').textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
         }
         document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 
         // ============================================================
-        // 9. ПРИВЯЗКА СОБЫТИЙ
+        // 9. OKAÝJYLAR (EVENT LISTENERS)
         // ============================================================
-
-        document.getElementById('loginLink').addEventListener('click', function () { openModal('loginModal'); });
-        document.getElementById('registerLink').addEventListener('click', function () { openModal('registerModal'); });
-        document.getElementById('profileLink').addEventListener('click', function () { openModal('profileModal'); });
+        document.getElementById('loginLink').addEventListener('click', function() { openModal('loginModal'); });
+        document.getElementById('registerLink').addEventListener('click', function() { openModal('registerModal'); });
+        document.getElementById('profileLink').addEventListener('click', function() { openModal('profileModal'); });
         document.getElementById('logoutLink').addEventListener('click', logoutUser);
         document.getElementById('logoutProfileBtn').addEventListener('click', logoutUser);
-
-        document.getElementById('switchToLogin').addEventListener('click', function () {
+        document.getElementById('switchToLogin').addEventListener('click', function() {
             closeModal('registerModal');
             openModal('loginModal');
         });
-        document.getElementById('switchToRegister').addEventListener('click', function () {
+        document.getElementById('switchToRegister').addEventListener('click', function() {
             closeModal('loginModal');
             openModal('registerModal');
         });
-
         document.getElementById('registerBtn').addEventListener('click', registerUser);
-        document.getElementById('loginBtn').addEventListener('click', function () { loginUser(); });
+        document.getElementById('loginBtn').addEventListener('click', function() { loginUser(); });
         document.getElementById('updateProfileBtn').addEventListener('click', updateProfile);
 
         // ============================================================
-        // 10. ЗАПУСК
+        // 10. ÇAT (SÖHBET) FUNKSIÝALARY
         // ============================================================
+        async function loadChats() {
+            if (!currentUser) return [];
+            var { data, error } = await supabase
+                .from('chats')
+                .select(`
+                    id,
+                    type,
+                    name,
+                    chat_participants!inner(user_id),
+                    messages(
+                        id,
+                        content,
+                        created_at,
+                        sender_id
+                    )
+                `)
+                .eq('chat_participants.user_id', currentUser.id)
+                .order('created_at', { foreignTable: 'messages', ascending: false })
+                .limit(1, { foreignTable: 'messages' });
+            if (error) {
+                console.error('Çatlar ýüklenmedi:', error);
+                return [];
+            }
+            return data;
+        }
 
-        supabase.auth.getSession().then(function (result) {
+        async function loadMessages(chatId) {
+            var { data, error } = await supabase
+                .from('messages')
+                .select('*, sender:users!sender_id(email, user_metadata)')
+                .eq('chat_id', chatId)
+                .order('created_at', { ascending: true });
+            if (error) {
+                console.error('Habarlar ýüklenmedi:', error);
+                return [];
+            }
+            return data;
+        }
+
+        async function sendMessage(chatId, content) {
+            if (!currentUser) return;
+            var { data, error } = await supabase
+                .from('messages')
+                .insert([{ chat_id: chatId, sender_id: currentUser.id, content }])
+                .select();
+            if (error) console.error('Habar iberilmedi:', error);
+            return data;
+        }
+
+        // Ulanyjyny e-poçta boýunça tapmak
+        async function findUserByEmail(email) {
+            var { data, error } = await supabase
+                .from('profiles')
+                .select('id')
+                .eq('email', email)
+                .single();
+            if (error || !data) {
+                // Eger profiles-de ýok bolsa, auth.users-dan gözle
+                var { data: userData, error: userError } = await supabase
+                    .auth
+                    .admin
+                    .listUsers();
+                if (userError) return null;
+                var found = userData.users.find(u => u.email === email);
+                return found ? found.id : null;
+            }
+            return data.id;
+        }
+
+        async function getOrCreatePersonalChat(otherUserId) {
+            // Öň bar bolan çaty gözle (özümiz we otherUserId gatnaşýan)
+            var { data: existing, error } = await supabase
+                .from('chat_participants')
+                .select('chat_id')
+                .eq('user_id', currentUser.id)
+                .filter('chat_id', 'in',
+                    supabase.from('chat_participants')
+                    .select('chat_id')
+                    .eq('user_id', otherUserId)
+                    .filter('chat_id', 'in',
+                        supabase.from('chats')
+                        .select('id')
+                        .eq('type', 'personal')
+                    )
+                );
+            if (existing && existing.length > 0) {
+                return existing[0].chat_id;
+            }
+            // Täze çat döret
+            var { data: newChat, error: chatError } = await supabase
+                .from('chats')
+                .insert([{ type: 'personal' }])
+                .select()
+                .single();
+            if (chatError) throw chatError;
+            // Gatnaşyjylary goş
+            await supabase.from('chat_participants').insert([
+                { chat_id: newChat.id, user_id: currentUser.id },
+                { chat_id: newChat.id, user_id: otherUserId }
+            ]);
+            return newChat.id;
+        }
+
+        function subscribeToMessages(chatId, onNewMessage) {
+            var channel = supabase.channel('chat-' + chatId);
+            channel
+                .on('postgres_changes', {
+                    event: 'INSERT',
+                    schema: 'public',
+                    table: 'messages',
+                    filter: 'chat_id=eq.' + chatId
+                }, function(payload) {
+                    onNewMessage(payload.new);
+                })
+                .subscribe();
+            return channel;
+        }
+
+        // ============================================================
+        // 11. ÇAT INTERFEÝS
+        // ============================================================
+        var currentChatId = null;
+        var chatSubscription = null;
+
+        document.getElementById('chatLink').addEventListener('click', function() {
+            if (!currentUser) {
+                alert('Ilki bilen giriň!');
+                return;
+            }
+            openModal('chatModal');
+            loadChatList();
+        });
+
+        async function loadChatList() {
+            var chats = await loadChats();
+            var list = document.getElementById('chatList');
+            if (!chats.length) {
+                list.innerHTML = '<p>Hiç hili söhbet ýok. Klassdaşlar bilen habarlaşyp başlaň!</p>';
+                return;
+            }
+            // Her çat üçin ady kesgitläň (şahsy bolsa beýleki gatnaşyjynyň ady)
+            var listHtml = '';
+            for (var i = 0; i < chats.length; i++) {
+                var chat = chats[i];
+                var name = chat.name;
+                if (chat.type === 'personal') {
+                    // Beýleki gatnaşyjyny tap
+                    var other = chat.chat_participants.find(function(p) { return p.user_id !== currentUser.id; });
+                    if (other) {
+                        // other.user_id-den profil al
+                        var { data: profile } = await supabase.from('profiles').select('full_name').eq('id', other
+                        .user_id).single();
+                        name = profile?.full_name || 'Näbelli';
+                    } else {
+                        name = 'Näbelli';
+                    }
+                }
+                var lastMsg = chat.messages && chat.messages.length > 0 ? chat.messages[0].content : 'Hiç habar ýok';
+                listHtml += '<div class="chat-item" data-chat-id="' + chat.id + '">' +
+                    '<strong>' + name + '</strong><br>' +
+                    '<small>' + lastMsg + '</small>' +
+                    '</div>';
+            }
+            list.innerHTML = listHtml;
+            document.querySelectorAll('.chat-item').forEach(function(el) {
+                el.addEventListener('click', function() {
+                    var chatId = parseInt(this.dataset.chatId);
+                    openChat(chatId);
+                });
+            });
+        }
+
+        async function openChat(chatId) {
+            currentChatId = chatId;
+            if (chatSubscription) {
+                supabase.removeChannel(chatSubscription);
+            }
+            var messages = await loadMessages(chatId);
+            renderMessages(messages);
+            chatSubscription = subscribeToMessages(chatId, function(newMsg) {
+                if (currentChatId === newMsg.chat_id) {
+                    appendMessage(newMsg);
+                }
+            });
+        }
+
+        function renderMessages(messages) {
+            var area = document.getElementById('messageArea');
+            if (!messages.length) {
+                area.innerHTML = '<p>Hiç habar ýok. Ilkinji habary ýazyň!</p>';
+                return;
+            }
+            var html = '';
+            for (var i = 0; i < messages.length; i++) {
+                var msg = messages[i];
+                var isMine = msg.sender_id === currentUser.id;
+                var senderName = msg.sender?.user_metadata?.full_name || msg.sender?.email || 'Näbelli';
+                html += '<div style="text-align:' + (isMine ? 'right' : 'left') + '; margin:5px 0;">' +
+                    '<div style="display:inline-block; background:' + (isMine ? '#3b82f6' : '#e2e8f0') + '; color:' + (
+                        isMine ? 'white' : 'black') + '; padding:8px 12px; border-radius:12px; max-width:70%;">' +
+                    (isMine ? '' : '<strong>' + senderName + '</strong><br>') +
+                    msg.content +
+                    '</div>' +
+                    '<div style="font-size:0.7rem; color:#888;">' + new Date(msg.created_at).toLocaleTimeString() +
+                    '</div>' +
+                    '</div>';
+            }
+            area.innerHTML = html;
+            area.scrollTop = area.scrollHeight;
+        }
+
+        function appendMessage(msg) {
+            var area = document.getElementById('messageArea');
+            if (area.innerHTML.includes('Hiç habar ýok')) area.innerHTML = '';
+            var isMine = msg.sender_id === currentUser.id;
+            var div = document.createElement('div');
+            div.style.textAlign = isMine ? 'right' : 'left';
+            div.style.margin = '5px 0';
+            div.innerHTML = '<div style="display:inline-block; background:' + (isMine ? '#3b82f6' : '#e2e8f0') + '; color:' + (
+                isMine ? 'white' : 'black') + '; padding:8px 12px; border-radius:12px; max-width:70%;">' +
+                msg.content +
+                '</div><div style="font-size:0.7rem; color:#888;">' + new Date(msg.created_at).toLocaleTimeString() +
+                '</div>';
+            area.appendChild(div);
+            area.scrollTop = area.scrollHeight;
+        }
+
+        document.getElementById('sendMessageBtn').addEventListener('click', async function() {
+            var input = document.getElementById('messageInput');
+            var content = input.value.trim();
+            if (!content || !currentChatId) return;
+            await sendMessage(currentChatId, content);
+            input.value = '';
+            var msg = { chat_id: currentChatId, sender_id: currentUser.id, content: content, created_at: new Date() };
+            appendMessage(msg);
+        });
+        document.getElementById('messageInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('sendMessageBtn').click();
+            }
+        });
+
+        // ============================================================
+        // 12. KLASSDAŞ BILEN HABARLAŞMAK
+        // ============================================================
+        window.startPersonalChat = async function(email) {
+            if (!currentUser) {
+                alert('Ilki bilen giriň!');
+                return;
+            }
+            var otherUserId = await findUserByEmail(email);
+            if (!otherUserId) {
+                alert('Bu e-poçta bilen ulanyjy tapylmady. Ol hasaba alynmadyk bolsa, hasaba alynsa işlär.');
+                return;
+            }
+            if (otherUserId === currentUser.id) {
+                alert('Özüňiz bilen habarlaşyp bilmersiňiz!');
+                return;
+            }
+            var chatId = await getOrCreatePersonalChat(otherUserId);
+            openModal('chatModal');
+            await loadChatList();
+            await openChat(chatId);
+        };
+
+        // ============================================================
+        // 13. BAŞLANGYÇ
+        // ============================================================
+        supabase.auth.getSession().then(function(result) {
             var session = result.data.session;
             if (session && session.user) {
                 loadUserProfile();
@@ -960,7 +1135,7 @@
             }
         });
 
-        supabase.auth.onAuthStateChange(function (event, session) {
+        supabase.auth.onAuthStateChange(function(event, session) {
             if (event === 'SIGNED_IN' && session && session.user) {
                 loadUserProfile();
             }
@@ -971,263 +1146,6 @@
                 loadAllData();
             }
         });
-        // ============================================================
-// 11. ÇAT (SÖHBET) FUNKSIÝALARY
-// ============================================================
-
-// Ähli çatlar we olaryň soňky habary
-async function loadChats() {
-  if (!currentUser) return [];
-  const { data, error } = await supabase
-    .from('chats')
-    .select(`
-      id,
-      type,
-      name,
-      chat_participants!inner(user_id),
-      messages(
-        id,
-        content,
-        created_at,
-        sender_id
-      )
-    `)
-    .eq('chat_participants.user_id', currentUser.id)
-    .order('created_at', { foreignTable: 'messages', ascending: false })
-    .limit(1, { foreignTable: 'messages' });
-
-  if (error) {
-    console.error('Çatlar ýüklenmedi:', error);
-    return [];
-  }
-  return data;
-}
-
-// Bellenen çatdaky habarlary almak
-async function loadMessages(chatId) {
-  const { data, error } = await supabase
-    .from('messages')
-    .select('*, sender:users!sender_id(email, user_metadata)')
-    .eq('chat_id', chatId)
-    .order('created_at', { ascending: true });
-
-  if (error) {
-    console.error('Habarlar ýüklenmedi:', error);
-    return [];
-  }
-  return data;
-}
-
-// Täze habar ibermek
-async function sendMessage(chatId, content) {
-  if (!currentUser) return;
-  const { data, error } = await supabase
-    .from('messages')
-    .insert([{ chat_id: chatId, sender_id: currentUser.id, content }])
-    .select();
-  if (error) console.error('Habar iberilmedi:', error);
-  return data;
-}
-
-// Täze şahsy çat açmak (eğer ýok bolsa)
-async function getOrCreatePersonalChat(otherUserId) {
-  // Öň bar bolan çaty gözle
-  const { data: existing, error } = await supabase
-    .from('chat_participants')
-    .select('chat_id')
-    .eq('user_id', currentUser.id)
-    .filter('chat_id', 'in', 
-      supabase.from('chat_participants')
-        .select('chat_id')
-        .eq('user_id', otherUserId)
-        .filter('chat_id', 'in',
-          supabase.from('chats')
-            .select('id')
-            .eq('type', 'personal')
-        )
-    );
-
-  if (existing && existing.length > 0) {
-    return existing[0].chat_id;
-  }
-
-  // Täze çat döret
-  const { data: newChat, error: chatError } = await supabase
-    .from('chats')
-    .insert([{ type: 'personal' }])
-    .select()
-    .single();
-
-  if (chatError) throw chatError;
-
-  // Gatnaşyjylary goş
-  await supabase.from('chat_participants').insert([
-    { chat_id: newChat.id, user_id: currentUser.id },
-    { chat_id: newChat.id, user_id: otherUserId }
-  ]);
-
-  return newChat.id;
-}
-
-// Realtime abuna ýazylmak (habarlar üçin)
-function subscribeToMessages(chatId, onNewMessage) {
-  const channel = supabase.channel(`chat-${chatId}`);
-  channel
-    .on(
-      'postgres_changes',
-      {
-        event: 'INSERT',
-        schema: 'public',
-        table: 'messages',
-        filter: `chat_id=eq.${chatId}`
-      },
-      (payload) => {
-        onNewMessage(payload.new);
-      }
-    )
-    .subscribe();
-  return channel;
-}
-        // Çat modalyny açmak
-document.getElementById('profileLink')?.addEventListener('click', function() {
-  openModal('profileModal');
-});
-// Söhbet baglanyşygyny goşmaly (mümkün bolsa menýuýa "Söhbet" düwmesi)
-// Menýuda täze düwme: <a id="chatLink">Söhbet</a>
-document.getElementById('chatLink')?.addEventListener('click', function() {
-  openModal('chatModal');
-  loadChatList();
-});
-
-let currentChatId = null;
-let chatSubscription = null;
-
-async function loadChatList() {
-  const chats = await loadChats();
-  const list = document.getElementById('chatList');
-  if (!chats.length) {
-    list.innerHTML = '<p>Hiç hili söhbet ýok. Klassdaşlar bilen habarlaşyp başlaň!</p>';
-    return;
-  }
-  list.innerHTML = chats.map(chat => {
-    const name = chat.type === 'personal' 
-      ? (chat.chat_participants.find(p => p.user_id !== currentUser.id)?.users?.email || 'Näbelli')
-      : chat.name;
-    const lastMsg = chat.messages?.[0]?.content || 'Hiç habar ýok';
-    return `<div class="chat-item" data-chat-id="${chat.id}" style="cursor:pointer; padding:10px; border-bottom:1px solid #eee;">
-      <strong>${name}</strong><br>
-      <small>${lastMsg}</small>
-    </div>`;
-  }).join('');
-
-  // Her çat elementi üçin klik işligi
-  document.querySelectorAll('.chat-item').forEach(el => {
-    el.addEventListener('click', function() {
-      const chatId = parseInt(this.dataset.chatId);
-      openChat(chatId);
-    });
-  });
-}
-
-async function openChat(chatId) {
-  currentChatId = chatId;
-  // Öňki abunalygy ýatyryň
-  if (chatSubscription) {
-    supabase.removeChannel(chatSubscription);
-  }
-  // Habarlary ýüklemek
-  const messages = await loadMessages(chatId);
-  renderMessages(messages);
-  // Täze habarlar üçin abuna ýazylmak
-  chatSubscription = subscribeToMessages(chatId, (newMsg) => {
-    // Eger häzirki çat bolsa, habary goş
-    if (currentChatId === newMsg.chat_id) {
-      appendMessage(newMsg);
-    }
-  });
-}
-
-function renderMessages(messages) {
-  const area = document.getElementById('messageArea');
-  if (!messages.length) {
-    area.innerHTML = '<p>Hiç habar ýok. Ilkinji habary ýazyň!</p>';
-    return;
-  }
-  area.innerHTML = messages.map(msg => {
-    const isMine = msg.sender_id === currentUser.id;
-    const senderName = msg.sender?.user_metadata?.full_name || msg.sender?.email || 'Näbelli';
-    return `<div style="text-align:${isMine ? 'right' : 'left'}; margin:5px 0;">
-      <div style="display:inline-block; background:${isMine ? '#3b82f6' : '#e2e8f0'}; color:${isMine ? 'white' : 'black'}; padding:8px 12px; border-radius:12px; max-width:70%;">
-        ${isMine ? '' : '<strong>' + senderName + '</strong><br>'}
-        ${msg.content}
-      </div>
-      <div style="font-size:0.7rem; color:#888;">${new Date(msg.created_at).toLocaleTimeString()}</div>
-    </div>`;
-  }).join('');
-  // Aşakda aýla
-  area.scrollTop = area.scrollHeight;
-}
-
-function appendMessage(msg) {
-  const area = document.getElementById('messageArea');
-  // Eger "Hiç habar ýok" ýa-da boş bolsa, arassala
-  if (area.innerHTML.includes('Hiç habar ýok')) area.innerHTML = '';
-  const isMine = msg.sender_id === currentUser.id;
-  // Bu ýerde sender maglumatlaryny almak üçin goşmaça sorag gerek, ýöne ýönekeýlik üçin diňe tekst
-  const div = document.createElement('div');
-  div.style.textAlign = isMine ? 'right' : 'left';
-  div.style.margin = '5px 0';
-  div.innerHTML = `<div style="display:inline-block; background:${isMine ? '#3b82f6' : '#e2e8f0'}; color:${isMine ? 'white' : 'black'}; padding:8px 12px; border-radius:12px; max-width:70%;">
-    ${msg.content}
-  </div><div style="font-size:0.7rem; color:#888;">${new Date(msg.created_at).toLocaleTimeString()}</div>`;
-  area.appendChild(div);
-  area.scrollTop = area.scrollHeight;
-}
-
-// Habar ibermek
-document.getElementById('sendMessageBtn')?.addEventListener('click', async function() {
-  const input = document.getElementById('messageInput');
-  const content = input.value.trim();
-  if (!content || !currentChatId) return;
-  await sendMessage(currentChatId, content);
-  input.value = '';
-  // Öz habarymyz derrew görkezmek üçin
-  const msg = { chat_id: currentChatId, sender_id: currentUser.id, content, created_at: new Date() };
-  appendMessage(msg);
-});
-
-// Enter basylanda iber
-document.getElementById('messageInput')?.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    document.getElementById('sendMessageBtn').click();
-  }
-});
-        // renderClassmates funksiýasyny üýtgedip, her karta düwme goşuň:
-function renderClassmates() {
-  // ... öňki kod
-  grid.innerHTML = filtered.map(c => `
-    <div class="card">
-      <img src="${c.img || '...'}" alt="${c.name}">
-      <h3>${c.name}</h3>
-      <div class="city">${c.city || ''}</div>
-      <small>${c.job || ''}</small>
-      ${currentUser ? `<button class="btn" style="margin-top:10px; padding:5px 15px; font-size:0.8rem;" onclick="startPersonalChat('${c.id}')">Habarlaş</button>` : ''}
-    </div>
-  `).join('');
-}
-
-// Funksiýa
-window.startPersonalChat = async function(otherUserId) {
-  if (!currentUser) {
-    alert('Ilki bilen giriň!');
-    return;
-  }
-  const chatId = await getOrCreatePersonalChat(otherUserId);
-  openModal('chatModal');
-  await loadChatList();
-  openChat(chatId);
-};
     </script>
 </body>
-
 </html>
