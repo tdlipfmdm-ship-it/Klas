@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klassdaşlar - 2005</title>
     <!-- Подключаем Supabase JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+    </script>
     <style>
+        /* ===== Глобальные стили ===== */
         * {
             margin: 0;
             padding: 0;
@@ -26,6 +28,7 @@
         a {
             color: #3b82f6;
             text-decoration: none;
+            cursor: pointer;
         }
         .container {
             max-width: 1200px;
@@ -33,7 +36,7 @@
             padding: 0 20px;
         }
 
-        /* Хедер */
+        /* ===== Хедер ===== */
         header {
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -61,8 +64,13 @@
         .logo span {
             color: #f59e0b;
         }
+        nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px 15px;
+        }
         nav a {
-            margin-left: 15px;
             font-weight: 500;
             color: #1e293b;
             transition: color 0.2s;
@@ -79,8 +87,8 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            margin-left: 15px;
             color: #1e293b;
+            padding: 0 5px;
         }
         body.dark .theme-toggle {
             color: #facc15;
@@ -110,15 +118,6 @@
         .btn:hover {
             background: #2563eb;
         }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #3b82f6;
-            color: #3b82f6;
-        }
-        .btn-outline:hover {
-            background: #3b82f6;
-            color: white;
-        }
         .btn-danger {
             background: #ef4444;
         }
@@ -126,7 +125,7 @@
             background: #dc2626;
         }
 
-        /* Секции */
+        /* ===== Секции ===== */
         section {
             padding: 60px 0;
             border-bottom: 1px solid #e2e8f0;
@@ -154,7 +153,7 @@
             border-radius: 2px;
         }
 
-        /* Герой */
+        /* ===== Герой ===== */
         .hero {
             text-align: center;
             padding: 60px 0 40px;
@@ -201,7 +200,7 @@
             color: #3b82f6;
         }
 
-        /* Карточки */
+        /* ===== Карточки одноклассников ===== */
         .classmates-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -243,7 +242,7 @@
             color: #94a3b8;
         }
 
-        /* Галерея */
+        /* ===== Галерея ===== */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -261,7 +260,7 @@
             transform: scale(1.03);
         }
 
-        /* События */
+        /* ===== События ===== */
         .event-list {
             display: flex;
             flex-direction: column;
@@ -290,7 +289,7 @@
             margin: 0 15px;
         }
 
-        /* Модальные окна */
+        /* ===== Модальные окна ===== */
         .modal {
             display: none;
             position: fixed;
@@ -327,6 +326,7 @@
             cursor: pointer;
             background: none;
             border: none;
+            color: inherit;
         }
         .modal-content h2 {
             font-size: 1.8rem;
@@ -365,6 +365,7 @@
             cursor: pointer;
             transition: background 0.2s;
             width: 100%;
+            margin-bottom: 8px;
         }
         .modal-content button:hover {
             background: #2563eb;
@@ -396,7 +397,7 @@
             text-align: center;
         }
 
-        /* Футер */
+        /* ===== Футер ===== */
         footer {
             background: white;
             padding: 30px 0;
@@ -408,13 +409,13 @@
             border-color: #334155;
         }
 
+        /* ===== Адаптив ===== */
         @media (max-width: 768px) {
             .logo {
                 font-size: 1.4rem;
             }
-            nav a {
-                margin-left: 10px;
-                font-size: 0.9rem;
+            nav {
+                gap: 5px 10px;
             }
             .hero h1 {
                 font-size: 2.2rem;
@@ -432,6 +433,13 @@
             .gallery {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
+            .event-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .event-item .desc {
+                margin: 8px 0;
+            }
         }
     </style>
 </head>
@@ -447,16 +455,16 @@
                 <a href="#gallery">Suratlar</a>
                 <a href="#events">Çäreler</a>
                 <span id="authLinks">
-                    <a onclick="openModal('loginModal')">Giriş</a>
-                    <a onclick="openModal('registerModal')">Hasaba alyş</a>
+                    <a id="loginLink">Giriş</a>
+                    <a id="registerLink">Hasaba alyş</a>
                 </span>
                 <span id="userMenu" style="display:none;" class="user-menu">
                     <img id="headerAvatar" class="avatar-small" src="" alt="avatar">
                     <span id="headerName"></span>
-                    <a onclick="openModal('profileModal')" style="margin-left:5px;">Profil</a>
-                    <a onclick="logoutUser()" style="color:#ef4444;">Çykmak</a>
+                    <a id="profileLink">Profil</a>
+                    <a id="logoutLink" style="color:#ef4444;">Çykmak</a>
                 </span>
-                <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
             </nav>
         </div>
     </header>
@@ -506,34 +514,34 @@
     <!-- ========== МОДАЛКА РЕГИСТРАЦИИ ========== -->
     <div class="modal" id="registerModal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('registerModal')">&times;</button>
+            <button class="modal-close" data-modal="registerModal">&times;</button>
             <h2>Hasaba alyş</h2>
             <div id="registerError" class="error-msg"></div>
             <input id="regFullName" type="text" placeholder="Doly adyňyz" required>
             <input id="regEmail" type="email" placeholder="E-poçta" required>
             <input id="regPassword" type="password" placeholder="Parol (6 harpdan köp)" required>
-            <button onclick="registerUser()">Hasaba al</button>
-            <div class="switch-link" onclick="closeModal('registerModal'); openModal('loginModal');">Eger hasabyňyz bar bolsa? Giriş</div>
+            <button id="registerBtn">Hasaba al</button>
+            <div class="switch-link" id="switchToLogin">Eger hasabyňyz bar bolsa? Giriş</div>
         </div>
     </div>
 
     <!-- ========== МОДАЛКА ВХОДА ========== -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('loginModal')">&times;</button>
+            <button class="modal-close" data-modal="loginModal">&times;</button>
             <h2>Giriş</h2>
             <div id="loginError" class="error-msg"></div>
             <input id="loginEmail" type="email" placeholder="E-poçta" required>
             <input id="loginPassword" type="password" placeholder="Parol" required>
-            <button onclick="loginUser()">Girmek</button>
-            <div class="switch-link" onclick="closeModal('loginModal'); openModal('registerModal');">Hasabyňyz ýokmy? Hasaba alyş</div>
+            <button id="loginBtn">Girmek</button>
+            <div class="switch-link" id="switchToRegister">Hasabyňyz ýokmy? Hasaba alyş</div>
         </div>
     </div>
 
     <!-- ========== МОДАЛКА ПРОФИЛЯ ========== -->
     <div class="modal" id="profileModal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('profileModal')">&times;</button>
+            <button class="modal-close" data-modal="profileModal">&times;</button>
             <h2>Profil</h2>
             <div id="profileError" class="error-msg"></div>
             <div class="avatar-upload">
@@ -544,15 +552,15 @@
             <input id="profileFullName" type="text" placeholder="Doly ady">
             <input id="profileCity" type="text" placeholder="Şäher">
             <input id="profileJob" type="text" placeholder="Hünär">
-            <button onclick="updateProfile()">Üýtgeşmeleri saklamak</button>
-            <button onclick="logoutUser()" class="btn-danger" style="margin-top:10px;">Çykmak</button>
+            <button id="updateProfileBtn">Üýtgeşmeleri saklamak</button>
+            <button id="logoutProfileBtn" class="btn-danger">Çykmak</button>
         </div>
     </div>
 
     <!-- ========== МОДАЛКА ДЛЯ ПРОСМОТРА ФОТО ========== -->
     <div class="modal" id="photoModal">
         <div class="modal-content" style="max-width:600px;">
-            <button class="modal-close" onclick="closeModal('photoModal')">&times;</button>
+            <button class="modal-close" data-modal="photoModal">&times;</button>
             <img id="modalImg" src="" alt="Surat" style="width:100%; border-radius:12px;">
         </div>
     </div>
@@ -561,7 +569,7 @@
         // ============================================================
         // 1. ПОДКЛЮЧЕНИЕ К SUPABASE (ВСТАВЬТЕ СВОИ ДАННЫЕ!)
         // ============================================================
-        const SUPABASE_URL = https://syhnwvbntohjjnkxsvno.supabase.co/rest/v1/; // ЗАМЕНИТЕ
+        const SUPABASE_URL = 'https://syhnwvbntohjjnkxsvno.supabase.co/rest/v1/'; // ЗАМЕНИТЕ
         const SUPABASE_ANON_KEY = 'sb_publishable__Zo8aDJcJlLSvQVd3ZTacQ_mEHRFuD2'; // ЗАМЕНИТЕ
 
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -575,7 +583,38 @@
         let allEvents = [];
 
         // ============================================================
-        // 3. АУТЕНТИФИКАЦИЯ
+        // 3. РАБОТА С МОДАЛЬНЫМИ ОКНАМИ (ГЛОБАЛЬНЫЕ ФУНКЦИИ)
+        // ============================================================
+        window.openModal = function(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('active');
+        };
+
+        window.closeModal = function(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.remove('active');
+            // Очищаем ошибки
+            const errs = el ? el.querySelectorAll('.error-msg') : [];
+            errs.forEach(e => e.textContent = '');
+        };
+
+        // Закрытие по клику на фон
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Закрытие по кнопке × (data-modal)
+        document.querySelectorAll('.modal-close').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const modalId = this.getAttribute('data-modal');
+                closeModal(modalId);
+            });
+        });
+
+        // ============================================================
+        // 4. АУТЕНТИФИКАЦИЯ
         // ============================================================
 
         async function registerUser() {
@@ -605,7 +644,7 @@
 
             alert('Tassyklama haty e-poçtaňyza iberildi! (ýa-da girip bilersiňiz)');
             closeModal('registerModal');
-            // Автоматически пробуем войти
+            // Автоматически пробуем войти (если email confirmation выключен)
             await loginUser(email, password);
         }
 
@@ -638,12 +677,11 @@
             document.getElementById('authLinks').style.display = 'inline';
             document.getElementById('userMenu').style.display = 'none';
             closeModal('profileModal');
-            // Перезагружаем данные (показываем всем)
             loadAllData();
         }
 
         // ============================================================
-        // 4. ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ
+        // 5. ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ
         // ============================================================
 
         async function loadUserProfile() {
@@ -687,7 +725,7 @@
             document.getElementById('profileAvatar').src = avatarUrl;
             document.getElementById('avatarUrlInput').value = avatarUrl;
 
-            loadAllData(); // загружаем данные на главную
+            loadAllData();
         }
 
         async function updateProfile() {
@@ -705,7 +743,6 @@
                 return;
             }
 
-            // Обновляем таблицу profiles
             const { error } = await supabase
                 .from('profiles')
                 .upsert({
@@ -722,17 +759,16 @@
                 return;
             }
 
-            // Обновляем метаданные пользователя (для отображения в хедере)
             await supabase.auth.updateUser({
                 data: { full_name: fullName }
             });
 
             alert('Profil täzelendi!');
-            await loadUserProfile(); // перезагружаем интерфейс
+            await loadUserProfile();
         }
 
         // ============================================================
-        // 5. ЗАГРУЗКА ДАННЫХ ИЗ БАЗЫ
+        // 6. ЗАГРУЗКА ДАННЫХ ИЗ БАЗЫ
         // ============================================================
 
         async function loadAllData() {
@@ -777,7 +813,7 @@
         }
 
         // ============================================================
-        // 6. ОТРИСОВКА
+        // 7. ОТРИСОВКА
         // ============================================================
 
         function renderClassmates() {
@@ -785,64 +821,81 @@
             const search = document.getElementById('searchInput').value.toLowerCase();
             const filtered = allClassmates.filter(c => c.name.toLowerCase().includes(search));
             grid.innerHTML = filtered.map(c => `
-                <div class="card">
-                    <img src="${c.img || 'https://i.pravatar.cc/150?img=10'}" alt="${c.name}">
-                    <h3>${c.name}</h3>
-                    <div class="city">${c.city || ''}</div>
-                    <small>${c.job || ''}</small>
-                </div>
-            `).join('');
+                    <div class="card">
+                        <img src="${c.img || 'https://i.pravatar.cc/150?img=10'}" alt="${c.name}">
+                        <h3>${c.name}</h3>
+                        <div class="city">${c.city || ''}</div>
+                        <small>${c.job || ''}</small>
+                    </div>
+                `).join('');
         }
 
         function renderGallery() {
             const grid = document.getElementById('galleryGrid');
             grid.innerHTML = allPhotos.map(p => `
-                <img src="${p.url}" alt="Surat" onclick="openModal('photoModal'); document.getElementById('modalImg').src='${p.url}'">
-            `).join('');
+                    <img src="${p.url}" alt="Surat" data-photo="${p.url}" class="gallery-img">
+                `).join('');
+            // вешаем обработчики на каждое фото
+            document.querySelectorAll('.gallery-img').forEach(img => {
+                img.addEventListener('click', function() {
+                    const src = this.getAttribute('data-photo');
+                    document.getElementById('modalImg').src = src;
+                    openModal('photoModal');
+                });
+            });
         }
 
         function renderEvents() {
             const list = document.getElementById('eventList');
             list.innerHTML = allEvents.map(e => `
-                <div class="event-item">
-                    <span class="date">${e.date}</span>
-                    <span class="desc">${e.description}</span>
-                </div>
-            `).join('');
+                    <div class="event-item">
+                        <span class="date">${e.date}</span>
+                        <span class="desc">${e.description}</span>
+                    </div>
+                `).join('');
         }
 
         // ============================================================
-        // 7. ПОИСК, ТЕМА, МОДАЛКИ
+        // 8. ПОИСК, ТЕМА
         // ============================================================
 
         document.getElementById('searchInput').addEventListener('input', renderClassmates);
 
-        function openModal(id) {
-            document.getElementById(id).classList.add('active');
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
-            // Очищаем ошибки
-            const errs = document.querySelectorAll('.error-msg');
-            errs.forEach(e => e.textContent = '');
-        }
-
-        // Клик вне модалки чтобы закрыть
-        window.addEventListener('click', function(e) {
-            if (e.target.classList.contains('modal')) {
-                e.target.classList.remove('active');
-            }
-        });
-
         function toggleTheme() {
             document.body.classList.toggle('dark');
-            const btn = document.querySelector('.theme-toggle');
+            const btn = document.getElementById('themeToggle');
             btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
         }
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 
         // ============================================================
-        // 8. ЗАПУСК
+        // 9. ПРИВЯЗКА СОБЫТИЙ К ЭЛЕМЕНТАМ (вместо onclick в HTML)
+        // ============================================================
+
+        // Кнопки входа/регистрации
+        document.getElementById('loginLink').addEventListener('click', () => openModal('loginModal'));
+        document.getElementById('registerLink').addEventListener('click', () => openModal('registerModal'));
+        document.getElementById('profileLink').addEventListener('click', () => openModal('profileModal'));
+        document.getElementById('logoutLink').addEventListener('click', logoutUser);
+        document.getElementById('logoutProfileBtn').addEventListener('click', logoutUser);
+
+        // Переключение между модалками
+        document.getElementById('switchToLogin').addEventListener('click', () => {
+            closeModal('registerModal');
+            openModal('loginModal');
+        });
+        document.getElementById('switchToRegister').addEventListener('click', () => {
+            closeModal('loginModal');
+            openModal('registerModal');
+        });
+
+        // Кнопки действий
+        document.getElementById('registerBtn').addEventListener('click', registerUser);
+        document.getElementById('loginBtn').addEventListener('click', loginUser);
+        document.getElementById('updateProfileBtn').addEventListener('click', updateProfile);
+
+        // ============================================================
+        // 10. ЗАПУСК
         // ============================================================
 
         // Проверяем, залогинен ли пользователь при загрузке
@@ -852,11 +905,11 @@
             } else {
                 document.getElementById('authLinks').style.display = 'inline';
                 document.getElementById('userMenu').style.display = 'none';
-                loadAllData(); // показываем данные анонимно
+                loadAllData();
             }
         });
 
-        // Слушаем изменения аутентификации (например, при выходе)
+        // Слушаем изменения аутентификации
         supabase.auth.onAuthStateChange((event, session) => {
             if (event === 'SIGNED_IN' && session?.user) {
                 loadUserProfile();
