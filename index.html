@@ -1088,6 +1088,120 @@ function subscribeToMessages(chatId, onNewMessage) {
     .subscribe();
   return channel;
 }
+        // Çat modalyny açmak
+document.getElementById('profileLink')?.addEventListener('click', function() {
+  openModal('profileModal');
+});
+// Söhbet baglanyşygyny goşmaly (mümkün bolsa menýuýa "Söhbet" düwmesi)
+// Menýuda täze düwme: <a id="chatLink">Söhbet</a>
+document.getElementById('chatLink')?.addEventListener('click', function() {
+  openModal('chatModal');
+  loadChatList();
+});
+
+let currentChatId = null;
+let chatSubscription = null;
+
+async function loadChatList() {
+  const chats = await loadChats();
+  const list = document.getElementById('chatList');
+  if (!chats.length) {
+    list.innerHTML = '<p>Hiç hili söhbet ýok. Klassdaşlar bilen habarlaşyp başlaň!</p>';
+    return;
+  }
+  list.innerHTML = chats.map(chat => {
+    const name = chat.type === 'personal' 
+      ? (chat.chat_participants.find(p => p.user_id !== currentUser.id)?.users?.email || 'Näbelli')
+      : chat.name;
+    const lastMsg = chat.messages?.[0]?.content || 'Hiç habar ýok';
+    return `<div class="chat-item" data-chat-id="${chat.id}" style="cursor:pointer; padding:10px; border-bottom:1px solid #eee;">
+      <strong>${name}</strong><br>
+      <small>${lastMsg}</small>
+    </div>`;
+  }).join('');
+
+  // Her çat elementi üçin klik işligi
+  document.querySelectorAll('.chat-item').forEach(el => {
+    el.addEventListener('click', function() {
+      const chatId = parseInt(this.dataset.chatId);
+      openChat(chatId);
+    });
+  });
+}
+
+async function openChat(chatId) {
+  currentChatId = chatId;
+  // Öňki abunalygy ýatyryň
+  if (chatSubscription) {
+    supabase.removeChannel(chatSubscription);
+  }
+  // Habarlary ýüklemek
+  const messages = await loadMessages(chatId);
+  renderMessages(messages);
+  // Täze habarlar üçin abuna ýazylmak
+  chatSubscription = subscribeToMessages(chatId, (newMsg) => {
+    // Eger häzirki çat bolsa, habary goş
+    if (currentChatId === newMsg.chat_id) {
+      appendMessage(newMsg);
+    }
+  });
+}
+
+function renderMessages(messages) {
+  const area = document.getElementById('messageArea');
+  if (!messages.length) {
+    area.innerHTML = '<p>Hiç habar ýok. Ilkinji habary ýazyň!</p>';
+    return;
+  }
+  area.innerHTML = messages.map(msg => {
+    const isMine = msg.sender_id === currentUser.id;
+    const senderName = msg.sender?.user_metadata?.full_name || msg.sender?.email || 'Näbelli';
+    return `<div style="text-align:${isMine ? 'right' : 'left'}; margin:5px 0;">
+      <div style="display:inline-block; background:${isMine ? '#3b82f6' : '#e2e8f0'}; color:${isMine ? 'white' : 'black'}; padding:8px 12px; border-radius:12px; max-width:70%;">
+        ${isMine ? '' : '<strong>' + senderName + '</strong><br>'}
+        ${msg.content}
+      </div>
+      <div style="font-size:0.7rem; color:#888;">${new Date(msg.created_at).toLocaleTimeString()}</div>
+    </div>`;
+  }).join('');
+  // Aşakda aýla
+  area.scrollTop = area.scrollHeight;
+}
+
+function appendMessage(msg) {
+  const area = document.getElementById('messageArea');
+  // Eger "Hiç habar ýok" ýa-da boş bolsa, arassala
+  if (area.innerHTML.includes('Hiç habar ýok')) area.innerHTML = '';
+  const isMine = msg.sender_id === currentUser.id;
+  // Bu ýerde sender maglumatlaryny almak üçin goşmaça sorag gerek, ýöne ýönekeýlik üçin diňe tekst
+  const div = document.createElement('div');
+  div.style.textAlign = isMine ? 'right' : 'left';
+  div.style.margin = '5px 0';
+  div.innerHTML = `<div style="display:inline-block; background:${isMine ? '#3b82f6' : '#e2e8f0'}; color:${isMine ? 'white' : 'black'}; padding:8px 12px; border-radius:12px; max-width:70%;">
+    ${msg.content}
+  </div><div style="font-size:0.7rem; color:#888;">${new Date(msg.created_at).toLocaleTimeString()}</div>`;
+  area.appendChild(div);
+  area.scrollTop = area.scrollHeight;
+}
+
+// Habar ibermek
+document.getElementById('sendMessageBtn')?.addEventListener('click', async function() {
+  const input = document.getElementById('messageInput');
+  const content = input.value.trim();
+  if (!content || !currentChatId) return;
+  await sendMessage(currentChatId, content);
+  input.value = '';
+  // Öz habarymyz derrew görkezmek üçin
+  const msg = { chat_id: currentChatId, sender_id: currentUser.id, content, created_at: new Date() };
+  appendMessage(msg);
+});
+
+// Enter basylanda iber
+document.getElementById('messageInput')?.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    document.getElementById('sendMessageBtn').click();
+  }
+});
     </script>
 </body>
 
