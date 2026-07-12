@@ -2,66 +2,530 @@
 <html lang="tk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Klas 27-nji Mekdep • Synpdaşlar</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klassdaşlar - 2005-nji ýyl</title>
+    <style>
+        /* ===== Глобальные стили ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f5f7fa;
+            color: #1e293b;
+            transition: background 0.3s, color 0.3s;
+            line-height: 1.6;
+        }
+        body.dark {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        a { color: #3b82f6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== Хедер ===== */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 10px 0;
+            transition: background 0.3s;
+        }
+        body.dark header {
+            background: #1e293b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+        .logo span { color: #f59e0b; }
+        nav a {
+            margin-left: 20px;
+            font-weight: 500;
+            color: #1e293b;
+            transition: color 0.2s;
+        }
+        body.dark nav a { color: #cbd5e1; }
+        nav a:hover { color: #3b82f6; }
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 20px;
+            color: #1e293b;
+        }
+        body.dark .theme-toggle { color: #facc15; }
+
+        /* ===== Секции ===== */
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        body.dark section { border-color: #334155; }
+        section:last-child { border: none; }
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #3b82f6;
+            border-radius: 2px;
+        }
+
+        /* ===== Герой ===== */
+        .hero {
+            text-align: center;
+            padding: 80px 0 60px;
+            background: linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+        body.dark .hero {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        .hero .sub {
+            font-size: 1.3rem;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+        body.dark .hero .sub { color: #94a3b8; }
+        .hero .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .hero .stats div {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            min-width: 120px;
+        }
+        body.dark .hero .stats div {
+            background: #1e293b;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .hero .stats .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        /* ===== Карточки одноклассников ===== */
+        .classmates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        body.dark .card {
+            background: #1e293b;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 3px solid #3b82f6;
+        }
+        .card h3 { font-size: 1.1rem; }
+        .card .city { color: #64748b; font-size: 0.9rem; }
+        body.dark .card .city { color: #94a3b8; }
+
+        /* ===== Галерея ===== */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .gallery img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .gallery img:hover {
+            transform: scale(1.03);
+        }
+
+        /* ===== События ===== */
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .event-item {
+            background: white;
+            padding: 20px 25px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        body.dark .event-item {
+            background: #1e293b;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .event-item .date {
+            font-weight: 600;
+            color: #3b82f6;
+        }
+        .event-item .desc { flex: 1; margin: 0 15px; }
+
+        /* ===== Форма ===== */
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+            transition: border 0.2s;
+        }
+        body.dark form input,
+        body.dark form textarea {
+            background: #1e293b;
+            border-color: #475569;
+            color: #e2e8f0;
+        }
+        form input:focus, form textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        form button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+        }
+        form button:hover { background: #2563eb; }
+
+        /* ===== Футер ===== */
+        footer {
+            background: white;
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+        body.dark footer {
+            background: #1e293b;
+            border-color: #334155;
+        }
+        footer .social a {
+            margin: 0 10px;
+            color: #3b82f6;
+            font-size: 1.5rem;
+        }
+
+        /* ===== Модалка ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        body.dark .modal-content {
+            background: #1e293b;
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* ===== Адаптив ===== */
+        @media (max-width: 768px) {
+            .logo { font-size: 1.4rem; }
+            nav a { margin-left: 10px; font-size: 0.9rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero .stats { gap: 15px; }
+            .hero .stats div { padding: 15px; min-width: 80px; }
+            .classmates-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+            .gallery { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .event-item { flex-direction: column; align-items: flex-start; }
+            .event-item .desc { margin: 10px 0; }
+        }
+        @media (max-width: 480px) {
+            header .container { flex-direction: column; align-items: stretch; }
+            nav { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+            nav a { margin: 5px 8px; }
+        }
+    </style>
 </head>
 <body>
-<div class="app-container" id="app">
-    <!-- Giriş ekrany -->
-    <div class="auth-screen" id="authScreen">
-        <div class="logo">Klas<span>.</span></div>
-        <div class="sub">27-nji mekdep • 2000-nji nesil</div>
-        <div class="avatar-big">👥</div>
-        
-        <div class="input-group">
-            <label>Adyňyz we Familiýaňyz</label>
-            <input type="text" id="authName" placeholder="Mysal: Aman Geldiýew" value="Aman">
+    <!-- Хедер -->
+    <header>
+        <div class="container">
+            <div class="logo">Klas<span>daşlar</span></div>
+            <nav>
+                <a href="#home">Baş sahypa</a>
+                <a href="#classmates">Klassdaşlar</a>
+                <a href="#gallery">Suratlar</a>
+                <a href="#events">Çäreler</a>
+                <a href="#contact">Habarlaşmak</a>
+                <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+            </nav>
         </div>
-        <div class="input-group">
-            <label>Klas / Grup</label>
-            <input type="text" id="authClass" placeholder="Mysal: 11A" value="11A">
-        </div>
+    </header>
 
-        <button class="btn-primary" id="loginBtn">Giriş</button>
-        <button class="btn-google" id="googleBtn">🔵 Gmail bilen giriş</button>
-        
-        <div class="auth-toggle">
-            Täze hasap? <a id="toggleRegister">Hasap aç</a>
-        </div>
-        <div class="toast" id="toastMsg"></div>
-    </div>
-
-    <!-- Esasy Söhbet paneli -->
-    <div class="main-screen" id="mainScreen">
-        <div class="main-header">
-            <div class="user-info">
-                <div class="user-avatar" id="mainAvatar">A</div>
-                <div>
-                    <div class="user-name" id="mainName">Aman Geldiýew</div>
-                    <div class="user-role" id="mainClass">11A</div>
-                </div>
+    <div class="container">
+        <!-- ГЛАВНАЯ -->
+        <section id="home" class="hero">
+            <h1>Hoş geldiňiz! 👋</h1>
+            <p class="sub">2005-nji ýylyň 11-nji «A» synp ugurdaşlary</p>
+            <p style="max-width:600px; margin:0 auto 20px; color:#475569;">
+                Biz 20 ýyl öň mekdepde dostlaşdyk. Indi täzeden duşuşmaga we ýatlamalary paýlaşmaga wagtyň geldi!
+            </p>
+            <div class="stats">
+                <div><span class="number" id="countClassmates">0</span><br>Klassdaş</div>
+                <div><span class="number" id="countEvents">0</span><br>Çäre</div>
+                <div><span class="number" id="countPhotos">0</span><br>Surat</div>
             </div>
-            <button class="btn-logout" id="logoutBtn">Çykmak</button>
-        </div>
+        </section>
 
-        <div class="chat-area" id="chatArea">
-            <div style="text-align:center; color:#94a3b8; font-size:13px; padding:20px;">Söhbet başlatmak üçin habar ýazyň</div>
-        </div>
+        <!-- ОДНОКЛАССНИКИ -->
+        <section id="classmates">
+            <h2>Klassdaşlar</h2>
+            <input type="text" id="searchInput" placeholder="Ady boýunça gözleg..." style="width:100%; max-width:300px; padding:10px 15px; border-radius:30px; border:1px solid #cbd5e1; margin-bottom:20px;">
+            <div class="classmates-grid" id="classmatesGrid"></div>
+        </section>
 
-        <div class="chat-input-area">
-            <input type="text" id="chatInput" placeholder="Habaryňyzy ýazyň..." maxlength="200">
-            <button id="sendBtn">➤</button>
-        </div>
+        <!-- ГАЛЕРЕЯ -->
+        <section id="gallery">
+            <h2>Suratlar</h2>
+            <div class="gallery" id="galleryGrid"></div>
+        </section>
 
-        <div class="action-bar">
-            <button class="btn-call" id="callBtn">📹 Wideo jaň (Simulýasiýa)</button>
+        <!-- СОБЫТИЯ -->
+        <section id="events">
+            <h2>Çäreler</h2>
+            <div class="event-list" id="eventList"></div>
+        </section>
+
+        <!-- КОНТАКТЫ -->
+        <section id="contact">
+            <h2>Habarlaşmak</h2>
+            <p style="margin-bottom:20px;">Biziň bilen habarlaşmak üçin aşakdaky formany dolduryň ýa-da sosial torlarda bizi tapyň.</p>
+            <form id="contactForm" onsubmit="sendMessage(event)">
+                <input type="text" placeholder="Adyňyz" required>
+                <input type="email" placeholder="E-poçta" required>
+                <textarea rows="4" placeholder="Habaryňyz..." required></textarea>
+                <button type="submit">Ibermek</button>
+            </form>
+            <div style="text-align:center; margin-top:20px;">
+                <a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">Telegram</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>© 2026 11-nji «A» synp. Ähli hukuklar goralan.</p>
+        </div>
+    </footer>
+
+    <!-- Модалка для просмотра фото -->
+    <div class="modal" id="photoModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <img id="modalImg" src="" alt="Surat" style="width:100%; border-radius:12px;">
         </div>
     </div>
-</div>
-<script src="app.js"></script>
+
+    <script>
+        // ============================================================
+        // ДАННЫЕ (изменяйте под себя)
+        // ============================================================
+
+        const classmates = [
+            { name: 'Aýgül Annamyradowa', city: 'Aşgabat', job: 'Mugallym', img: 'https://i.pravatar.cc/150?img=1' },
+            { name: 'Begenç Nurmyradow', city: 'Daşoguz', job: 'Inžener', img: 'https://i.pravatar.cc/150?img=2' },
+            { name: 'Gülşat Orazowa', city: 'Mary', job: 'Lukman', img: 'https://i.pravatar.cc/150?img=3' },
+            { name: 'Döwletgeldi Ýazmyradow', city: 'Aşgabat', job: 'Programmist', img: 'https://i.pravatar.cc/150?img=4' },
+            { name: 'Merjen Atamyradowa', city: 'Türkmenabat', job: 'Dizaýner', img: 'https://i.pravatar.cc/150?img=5' },
+            { name: 'Serdar Gurbanow', city: 'Aşgabat', job: 'Bankir', img: 'https://i.pravatar.cc/150?img=6' },
+            { name: 'Oguljeren Meredowa', city: 'Mary', job: 'Täjir', img: 'https://i.pravatar.cc/150?img=7' },
+            { name: 'Hudayberdi Ataýew', city: 'Daşoguz', job: 'Müdir', img: 'https://i.pravatar.cc/150?img=8' },
+        ];
+
+        const photos = [
+            'https://picsum.photos/seed/school1/300/200',
+            'https://picsum.photos/seed/school2/300/200',
+            'https://picsum.photos/seed/school3/300/200',
+            'https://picsum.photos/seed/school4/300/200',
+            'https://picsum.photos/seed/school5/300/200',
+            'https://picsum.photos/seed/school6/300/200',
+        ];
+
+        const events = [
+            { date: '15.08.2026', desc: 'Mekdepde duşuşyk (saat 10:00)' },
+            { date: '20.09.2026', desc: 'Ýadygärlik seýilgähinde piknik' },
+            { date: '05.11.2026', desc: 'Online wideo-ýygnak (Zoom)' },
+        ];
+
+        // ============================================================
+        // ОТРИСОВКА
+        // ============================================================
+
+        function renderClassmates() {
+            const grid = document.getElementById('classmatesGrid');
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = classmates.filter(c => c.name.toLowerCase().includes(search));
+            grid.innerHTML = filtered.map(c => `
+                <div class="card">
+                    <img src="${c.img}" alt="${c.name}">
+                    <h3>${c.name}</h3>
+                    <div class="city">${c.city}</div>
+                    <small>${c.job}</small>
+                </div>
+            `).join('');
+            document.getElementById('countClassmates').textContent = classmates.length;
+        }
+
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
+            grid.innerHTML = photos.map(src => `
+                <img src="${src}" alt="Surat" onclick="openModal('${src}')">
+            `).join('');
+            document.getElementById('countPhotos').textContent = photos.length;
+        }
+
+        function renderEvents() {
+            const list = document.getElementById('eventList');
+            list.innerHTML = events.map(e => `
+                <div class="event-item">
+                    <span class="date">${e.date}</span>
+                    <span class="desc">${e.desc}</span>
+                </div>
+            `).join('');
+            document.getElementById('countEvents').textContent = events.length;
+        }
+
+        // ============================================================
+        // ПОИСК
+        // ============================================================
+
+        document.getElementById('searchInput').addEventListener('input', renderClassmates);
+
+        // ============================================================
+        // МОДАЛКА
+        // ============================================================
+
+        function openModal(src) {
+            document.getElementById('modalImg').src = src;
+            document.getElementById('photoModal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('photoModal').classList.remove('active');
+        }
+        document.getElementById('photoModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // ============================================================
+        // ТЕМА
+        // ============================================================
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const btn = document.querySelector('.theme-toggle');
+            btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+        }
+
+        // ============================================================
+        // ФОРМА
+        // ============================================================
+
+        function sendMessage(e) {
+            e.preventDefault();
+            alert('Habaryňyz üstünlikli iberildi! Biz siz bilen ýakyn wagtda habarlaşarys.');
+            e.target.reset();
+        }
+
+        // ============================================================
+        // ЗАПУСК
+        // ============================================================
+
+        renderClassmates();
+        renderGallery();
+        renderEvents();
+    </script>
 </body>
 </html>
