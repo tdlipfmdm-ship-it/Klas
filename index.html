@@ -517,7 +517,29 @@
                 <div><span class="number" id="countPhotos">0</span><br>Surat</div>
             </div>
         </section>
-
+<!-- Çat modal -->
+<div class="modal" id="chatModal">
+  <div class="modal-content" style="max-width:700px;">
+    <button class="modal-close" data-modal="chatModal">&times;</button>
+    <h2>Söhbet</h2>
+    <div style="display:flex; gap:15px; height:400px;">
+      <!-- Çatlar sanawy -->
+      <div style="width:30%; border-right:1px solid #ccc; overflow-y:auto;" id="chatList">
+        <p>Ýüklenýär...</p>
+      </div>
+      <!-- Habarlar penjiresi -->
+      <div style="flex:1; display:flex; flex-direction:column;">
+        <div style="flex:1; overflow-y:auto; padding:10px;" id="messageArea">
+          <p>Çat saýlaň</p>
+        </div>
+        <div style="display:flex; gap:5px; margin-top:10px;">
+          <input type="text" id="messageInput" placeholder="Habaryňyzy ýazyň..." style="flex:1;">
+          <button id="sendMessageBtn" class="btn">Iber</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         <section id="classmates">
             <h2>Klassdaşlar</h2>
             <input type="text" id="searchInput" placeholder="Ady boýunça gözleg..."
