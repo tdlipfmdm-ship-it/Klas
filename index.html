@@ -1202,6 +1202,31 @@ document.getElementById('messageInput')?.addEventListener('keydown', function(e)
     document.getElementById('sendMessageBtn').click();
   }
 });
+        // renderClassmates funksiýasyny üýtgedip, her karta düwme goşuň:
+function renderClassmates() {
+  // ... öňki kod
+  grid.innerHTML = filtered.map(c => `
+    <div class="card">
+      <img src="${c.img || '...'}" alt="${c.name}">
+      <h3>${c.name}</h3>
+      <div class="city">${c.city || ''}</div>
+      <small>${c.job || ''}</small>
+      ${currentUser ? `<button class="btn" style="margin-top:10px; padding:5px 15px; font-size:0.8rem;" onclick="startPersonalChat('${c.id}')">Habarlaş</button>` : ''}
+    </div>
+  `).join('');
+}
+
+// Funksiýa
+window.startPersonalChat = async function(otherUserId) {
+  if (!currentUser) {
+    alert('Ilki bilen giriň!');
+    return;
+  }
+  const chatId = await getOrCreatePersonalChat(otherUserId);
+  openModal('chatModal');
+  await loadChatList();
+  openChat(chatId);
+};
     </script>
 </body>
 
