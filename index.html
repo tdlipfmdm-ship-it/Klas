@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klassdaşlar - 2005</title>
-    <!-- Подключаем Supabase JS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
     </script>
     <style>
-        /* ===== Глобальные стили ===== */
         * {
             margin: 0;
             padding: 0;
@@ -35,8 +33,6 @@
             margin: 0 auto;
             padding: 0 20px;
         }
-
-        /* ===== Хедер ===== */
         header {
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
@@ -105,27 +101,6 @@
             object-fit: cover;
             border: 2px solid #3b82f6;
         }
-        .btn {
-            padding: 8px 18px;
-            border: none;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            background: #3b82f6;
-            color: white;
-        }
-        .btn:hover {
-            background: #2563eb;
-        }
-        .btn-danger {
-            background: #ef4444;
-        }
-        .btn-danger:hover {
-            background: #dc2626;
-        }
-
-        /* ===== Секции ===== */
         section {
             padding: 60px 0;
             border-bottom: 1px solid #e2e8f0;
@@ -152,8 +127,6 @@
             background: #3b82f6;
             border-radius: 2px;
         }
-
-        /* ===== Герой ===== */
         .hero {
             text-align: center;
             padding: 60px 0 40px;
@@ -199,8 +172,6 @@
             font-weight: 700;
             color: #3b82f6;
         }
-
-        /* ===== Карточки одноклассников ===== */
         .classmates-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -241,8 +212,6 @@
         body.dark .card .city {
             color: #94a3b8;
         }
-
-        /* ===== Галерея ===== */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -259,8 +228,6 @@
         .gallery img:hover {
             transform: scale(1.03);
         }
-
-        /* ===== События ===== */
         .event-list {
             display: flex;
             flex-direction: column;
@@ -288,8 +255,6 @@
             flex: 1;
             margin: 0 15px;
         }
-
-        /* ===== Модальные окна ===== */
         .modal {
             display: none;
             position: fixed;
@@ -396,8 +361,6 @@
             margin-bottom: 10px;
             text-align: center;
         }
-
-        /* ===== Футер ===== */
         footer {
             background: white;
             padding: 30px 0;
@@ -408,8 +371,6 @@
             background: #1e293b;
             border-color: #334155;
         }
-
-        /* ===== Адаптив ===== */
         @media (max-width: 768px) {
             .logo {
                 font-size: 1.4rem;
@@ -445,7 +406,6 @@
 </head>
 <body>
 
-    <!-- ========== ХЕДЕР ========== -->
     <header>
         <div class="container">
             <div class="logo">Klas<span>daşlar</span></div>
@@ -470,7 +430,6 @@
     </header>
 
     <div class="container">
-        <!-- ГЛАВНАЯ -->
         <section id="home" class="hero">
             <h1>Hoş geldiňiz! 👋</h1>
             <p class="sub">2005-nji ýylyň 11-nji «A» synp ugurdaşlary</p>
@@ -484,34 +443,30 @@
             </div>
         </section>
 
-        <!-- ОДНОКЛАССНИКИ -->
         <section id="classmates">
             <h2>Klassdaşlar</h2>
             <input type="text" id="searchInput" placeholder="Ady boýunça gözleg..." style="width:100%; max-width:300px; padding:10px 15px; border-radius:30px; border:1px solid #cbd5e1; margin-bottom:20px;">
             <div class="classmates-grid" id="classmatesGrid"></div>
         </section>
 
-        <!-- ГАЛЕРЕЯ -->
         <section id="gallery">
             <h2>Suratlar</h2>
             <div class="gallery" id="galleryGrid"></div>
         </section>
 
-        <!-- СОБЫТИЯ -->
         <section id="events">
             <h2>Çäreler</h2>
             <div class="event-list" id="eventList"></div>
         </section>
     </div>
 
-    <!-- Футер -->
     <footer>
         <div class="container">
             <p>© 2026 11-nji «A» synp. Ähli hukuklar goralan.</p>
         </div>
     </footer>
 
-    <!-- ========== МОДАЛКА РЕГИСТРАЦИИ ========== -->
+    <!-- Модалки -->
     <div class="modal" id="registerModal">
         <div class="modal-content">
             <button class="modal-close" data-modal="registerModal">&times;</button>
@@ -525,7 +480,6 @@
         </div>
     </div>
 
-    <!-- ========== МОДАЛКА ВХОДА ========== -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <button class="modal-close" data-modal="loginModal">&times;</button>
@@ -538,7 +492,6 @@
         </div>
     </div>
 
-    <!-- ========== МОДАЛКА ПРОФИЛЯ ========== -->
     <div class="modal" id="profileModal">
         <div class="modal-content">
             <button class="modal-close" data-modal="profileModal">&times;</button>
@@ -557,7 +510,6 @@
         </div>
     </div>
 
-    <!-- ========== МОДАЛКА ДЛЯ ПРОСМОТРА ФОТО ========== -->
     <div class="modal" id="photoModal">
         <div class="modal-content" style="max-width:600px;">
             <button class="modal-close" data-modal="photoModal">&times;</button>
@@ -567,48 +519,51 @@
 
     <script>
         // ============================================================
-        // 1. ПОДКЛЮЧЕНИЕ К SUPABASE (ВСТАВЬТЕ СВОИ ДАННЫЕ!)
+        // 1. ПОДКЛЮЧЕНИЕ К SUPABASE - ВСТАВЬТЕ СВОИ ДАННЫЕ!
         // ============================================================
-        const SUPABASE_URL = https://syhnwvbntohjjnkxsvno.supabase.co/rest/v1/; // ЗАМЕНИТЕ
-        const SUPABASE_ANON_KEY = sb_publishable__Zo8aDJcJlLSvQVd3ZTacQ_mEHRFuD2; // ЗАМЕНИТЕ
+        var SUPABASE_URL = https://syhnwvbntohjjnkxsvno.supabase.co/rest/v1/; // ЗАМЕНИТЕ
+        var SUPABASE_ANON_KEY = sb_publishable__Zo8aDJcJlLSvQVd3ZTacQ_mEHRFuD2; // ЗАМЕНИТЕ
 
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        if (SUPABASE_URL === 'https://syhnwvbntohjjnkxsvno.supabase.co/rest/v1/' || SUPABASE_ANON_KEY === 'sb_publishable__Zo8aDJcJlLSvQVd3ZTacQ_mEHRFuD2') {
+            console.warn('ВНИМАНИЕ: Вы не заменили SUPABASE_URL и SUPABASE_ANON_KEY на свои!');
+        }
+
+        var supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // ============================================================
         // 2. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
         // ============================================================
-        let currentUser = null;
-        let allClassmates = [];
-        let allPhotos = [];
-        let allEvents = [];
+        var currentUser = null;
+        var allClassmates = [];
+        var allPhotos = [];
+        var allEvents = [];
 
         // ============================================================
-        // 3. РАБОТА С МОДАЛЬНЫМИ ОКНАМИ (ГЛОБАЛЬНЫЕ ФУНКЦИИ)
+        // 3. РАБОТА С МОДАЛЬНЫМИ ОКНАМИ
         // ============================================================
         window.openModal = function(id) {
-            const el = document.getElementById(id);
+            var el = document.getElementById(id);
             if (el) el.classList.add('active');
         };
 
         window.closeModal = function(id) {
-            const el = document.getElementById(id);
+            var el = document.getElementById(id);
             if (el) el.classList.remove('active');
-            // Очищаем ошибки
-            const errs = el ? el.querySelectorAll('.error-msg') : [];
-            errs.forEach(e => e.textContent = '');
+            var errs = el ? el.querySelectorAll('.error-msg') : [];
+            for (var i = 0; i < errs.length; i++) {
+                errs[i].textContent = '';
+            }
         };
 
-        // Закрытие по клику на фон
         document.addEventListener('click', function(e) {
             if (e.target.classList.contains('modal')) {
                 e.target.classList.remove('active');
             }
         });
 
-        // Закрытие по кнопке × (data-modal)
-        document.querySelectorAll('.modal-close').forEach(btn => {
+        document.querySelectorAll('.modal-close').forEach(function(btn) {
             btn.addEventListener('click', function() {
-                const modalId = this.getAttribute('data-modal');
+                var modalId = this.getAttribute('data-modal');
                 closeModal(modalId);
             });
         });
@@ -618,10 +573,10 @@
         // ============================================================
 
         async function registerUser() {
-            const fullName = document.getElementById('regFullName').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const password = document.getElementById('regPassword').value;
-            const errorDiv = document.getElementById('registerError');
+            var fullName = document.getElementById('regFullName').value.trim();
+            var email = document.getElementById('regEmail').value.trim();
+            var password = document.getElementById('regPassword').value;
+            var errorDiv = document.getElementById('registerError');
 
             errorDiv.textContent = '';
             if (!fullName || !email || password.length < 6) {
@@ -629,27 +584,26 @@
                 return;
             }
 
-            const { data, error } = await supabase.auth.signUp({
-                email,
-                password,
+            var result = await supabase.auth.signUp({
+                email: email,
+                password: password,
                 options: {
                     data: { full_name: fullName }
                 }
             });
 
-            if (error) {
-                errorDiv.textContent = 'Ýalňyşlyk: ' + error.message;
+            if (result.error) {
+                errorDiv.textContent = 'Ýalňyşlyk: ' + result.error.message;
                 return;
             }
 
             alert('Tassyklama haty e-poçtaňyza iberildi! (ýa-da girip bilersiňiz)');
             closeModal('registerModal');
-            // Автоматически пробуем войти (если email confirmation выключен)
             await loginUser(email, password);
         }
 
         async function loginUser(email, password) {
-            const errorDiv = document.getElementById('loginError');
+            var errorDiv = document.getElementById('loginError');
             if (!email || !password) {
                 email = document.getElementById('loginEmail').value.trim();
                 password = document.getElementById('loginPassword').value;
@@ -660,10 +614,10 @@
                 return;
             }
 
-            const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+            var result = await supabase.auth.signInWithPassword({ email: email, password: password });
 
-            if (error) {
-                errorDiv.textContent = 'Giriş ýalňyş: ' + error.message;
+            if (result.error) {
+                errorDiv.textContent = 'Giriş ýalňyş: ' + result.error.message;
                 return;
             }
 
@@ -685,7 +639,10 @@
         // ============================================================
 
         async function loadUserProfile() {
-            const { data: { user }, error } = await supabase.auth.getUser();
+            var result = await supabase.auth.getUser();
+            var user = result.data.user;
+            var error = result.error;
+
             if (error || !user) {
                 document.getElementById('authLinks').style.display = 'inline';
                 document.getElementById('userMenu').style.display = 'none';
@@ -696,29 +653,27 @@
             document.getElementById('authLinks').style.display = 'none';
             document.getElementById('userMenu').style.display = 'flex';
 
-            // Загружаем профиль из таблицы profiles
-            const { data: profile, error: pErr } = await supabase
+            var profileResult = await supabase
                 .from('profiles')
                 .select('*')
                 .eq('id', user.id)
                 .single();
 
-            let fullName = user.user_metadata?.full_name || user.email;
-            let avatarUrl = 'https://i.pravatar.cc/150?img=11';
-            let city = '';
-            let job = '';
+            var fullName = user.user_metadata?.full_name || user.email;
+            var avatarUrl = 'https://i.pravatar.cc/150?img=11';
+            var city = '';
+            var job = '';
 
-            if (!pErr && profile) {
-                fullName = profile.full_name || fullName;
-                avatarUrl = profile.avatar_url || avatarUrl;
-                city = profile.city || '';
-                job = profile.job || '';
+            if (!profileResult.error && profileResult.data) {
+                fullName = profileResult.data.full_name || fullName;
+                avatarUrl = profileResult.data.avatar_url || avatarUrl;
+                city = profileResult.data.city || '';
+                job = profileResult.data.job || '';
             }
 
             document.getElementById('headerName').textContent = fullName.split(' ')[0];
             document.getElementById('headerAvatar').src = avatarUrl;
 
-            // Заполняем модалку профиля
             document.getElementById('profileFullName').value = fullName;
             document.getElementById('profileCity').value = city;
             document.getElementById('profileJob').value = job;
@@ -730,20 +685,20 @@
 
         async function updateProfile() {
             if (!currentUser) return;
-            const errorDiv = document.getElementById('profileError');
+            var errorDiv = document.getElementById('profileError');
             errorDiv.textContent = '';
 
-            const fullName = document.getElementById('profileFullName').value.trim();
-            const city = document.getElementById('profileCity').value.trim();
-            const job = document.getElementById('profileJob').value.trim();
-            const avatarUrl = document.getElementById('avatarUrlInput').value.trim();
+            var fullName = document.getElementById('profileFullName').value.trim();
+            var city = document.getElementById('profileCity').value.trim();
+            var job = document.getElementById('profileJob').value.trim();
+            var avatarUrl = document.getElementById('avatarUrlInput').value.trim();
 
             if (!fullName) {
                 errorDiv.textContent = 'Ady girizmeli!';
                 return;
             }
 
-            const { error } = await supabase
+            var result = await supabase
                 .from('profiles')
                 .upsert({
                     id: currentUser.id,
@@ -754,8 +709,8 @@
                     updated_at: new Date()
                 }, { onConflict: 'id' });
 
-            if (error) {
-                errorDiv.textContent = 'Saklap bolmady: ' + error.message;
+            if (result.error) {
+                errorDiv.textContent = 'Saklap bolmady: ' + result.error.message;
                 return;
             }
 
@@ -768,7 +723,7 @@
         }
 
         // ============================================================
-        // 6. ЗАГРУЗКА ДАННЫХ ИЗ БАЗЫ
+        // 6. ЗАГРУЗКА ДАННЫХ
         // ============================================================
 
         async function loadAllData() {
@@ -780,34 +735,34 @@
         }
 
         async function loadClassmates() {
-            const { data, error } = await supabase.from('classmates').select('*');
-            if (error) {
-                console.error('Ошибка загрузки одноклассников:', error);
+            var result = await supabase.from('classmates').select('*');
+            if (result.error) {
+                console.error('Ошибка загрузки одноклассников:', result.error);
                 return;
             }
-            allClassmates = data || [];
+            allClassmates = result.data || [];
             renderClassmates();
             document.getElementById('countClassmates').textContent = allClassmates.length;
         }
 
         async function loadPhotos() {
-            const { data, error } = await supabase.from('photos').select('*');
-            if (error) {
-                console.error('Ошибка загрузки фото:', error);
+            var result = await supabase.from('photos').select('*');
+            if (result.error) {
+                console.error('Ошибка загрузки фото:', result.error);
                 return;
             }
-            allPhotos = data || [];
+            allPhotos = result.data || [];
             renderGallery();
             document.getElementById('countPhotos').textContent = allPhotos.length;
         }
 
         async function loadEvents() {
-            const { data, error } = await supabase.from('events').select('*');
-            if (error) {
-                console.error('Ошибка загрузки событий:', error);
+            var result = await supabase.from('events').select('*');
+            if (result.error) {
+                console.error('Ошибка загрузки событий:', result.error);
                 return;
             }
-            allEvents = data || [];
+            allEvents = result.data || [];
             renderEvents();
             document.getElementById('countEvents').textContent = allEvents.length;
         }
@@ -817,28 +772,29 @@
         // ============================================================
 
         function renderClassmates() {
-            const grid = document.getElementById('classmatesGrid');
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = allClassmates.filter(c => c.name.toLowerCase().includes(search));
-            grid.innerHTML = filtered.map(c => `
-                    <div class="card">
-                        <img src="${c.img || 'https://i.pravatar.cc/150?img=10'}" alt="${c.name}">
-                        <h3>${c.name}</h3>
-                        <div class="city">${c.city || ''}</div>
-                        <small>${c.job || ''}</small>
-                    </div>
-                `).join('');
+            var grid = document.getElementById('classmatesGrid');
+            var search = document.getElementById('searchInput').value.toLowerCase();
+            var filtered = allClassmates.filter(function(c) {
+                return c.name.toLowerCase().includes(search);
+            });
+            grid.innerHTML = filtered.map(function(c) {
+                return '<div class="card">' +
+                    '<img src="' + (c.img || 'https://i.pravatar.cc/150?img=10') + '" alt="' + c.name + '">' +
+                    '<h3>' + c.name + '</h3>' +
+                    '<div class="city">' + (c.city || '') + '</div>' +
+                    '<small>' + (c.job || '') + '</small>' +
+                    '</div>';
+            }).join('');
         }
 
         function renderGallery() {
-            const grid = document.getElementById('galleryGrid');
-            grid.innerHTML = allPhotos.map(p => `
-                    <img src="${p.url}" alt="Surat" data-photo="${p.url}" class="gallery-img">
-                `).join('');
-            // вешаем обработчики на каждое фото
-            document.querySelectorAll('.gallery-img').forEach(img => {
+            var grid = document.getElementById('galleryGrid');
+            grid.innerHTML = allPhotos.map(function(p) {
+                return '<img src="' + p.url + '" alt="Surat" data-photo="' + p.url + '" class="gallery-img">';
+            }).join('');
+            document.querySelectorAll('.gallery-img').forEach(function(img) {
                 img.addEventListener('click', function() {
-                    const src = this.getAttribute('data-photo');
+                    var src = this.getAttribute('data-photo');
                     document.getElementById('modalImg').src = src;
                     openModal('photoModal');
                 });
@@ -846,13 +802,13 @@
         }
 
         function renderEvents() {
-            const list = document.getElementById('eventList');
-            list.innerHTML = allEvents.map(e => `
-                    <div class="event-item">
-                        <span class="date">${e.date}</span>
-                        <span class="desc">${e.description}</span>
-                    </div>
-                `).join('');
+            var list = document.getElementById('eventList');
+            list.innerHTML = allEvents.map(function(e) {
+                return '<div class="event-item">' +
+                    '<span class="date">' + e.date + '</span>' +
+                    '<span class="desc">' + e.description + '</span>' +
+                    '</div>';
+            }).join('');
         }
 
         // ============================================================
@@ -863,44 +819,41 @@
 
         function toggleTheme() {
             document.body.classList.toggle('dark');
-            const btn = document.getElementById('themeToggle');
+            var btn = document.getElementById('themeToggle');
             btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
         }
         document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 
         // ============================================================
-        // 9. ПРИВЯЗКА СОБЫТИЙ К ЭЛЕМЕНТАМ (вместо onclick в HTML)
+        // 9. ПРИВЯЗКА СОБЫТИЙ
         // ============================================================
 
-        // Кнопки входа/регистрации
-        document.getElementById('loginLink').addEventListener('click', () => openModal('loginModal'));
-        document.getElementById('registerLink').addEventListener('click', () => openModal('registerModal'));
-        document.getElementById('profileLink').addEventListener('click', () => openModal('profileModal'));
+        document.getElementById('loginLink').addEventListener('click', function() { openModal('loginModal'); });
+        document.getElementById('registerLink').addEventListener('click', function() { openModal('registerModal'); });
+        document.getElementById('profileLink').addEventListener('click', function() { openModal('profileModal'); });
         document.getElementById('logoutLink').addEventListener('click', logoutUser);
         document.getElementById('logoutProfileBtn').addEventListener('click', logoutUser);
 
-        // Переключение между модалками
-        document.getElementById('switchToLogin').addEventListener('click', () => {
+        document.getElementById('switchToLogin').addEventListener('click', function() {
             closeModal('registerModal');
             openModal('loginModal');
         });
-        document.getElementById('switchToRegister').addEventListener('click', () => {
+        document.getElementById('switchToRegister').addEventListener('click', function() {
             closeModal('loginModal');
             openModal('registerModal');
         });
 
-        // Кнопки действий
         document.getElementById('registerBtn').addEventListener('click', registerUser);
-        document.getElementById('loginBtn').addEventListener('click', loginUser);
+        document.getElementById('loginBtn').addEventListener('click', function() { loginUser(); });
         document.getElementById('updateProfileBtn').addEventListener('click', updateProfile);
 
         // ============================================================
         // 10. ЗАПУСК
         // ============================================================
 
-        // Проверяем, залогинен ли пользователь при загрузке
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            if (session?.user) {
+        supabase.auth.getSession().then(function(result) {
+            var session = result.data.session;
+            if (session && session.user) {
                 loadUserProfile();
             } else {
                 document.getElementById('authLinks').style.display = 'inline';
@@ -909,9 +862,8 @@
             }
         });
 
-        // Слушаем изменения аутентификации
-        supabase.auth.onAuthStateChange((event, session) => {
-            if (event === 'SIGNED_IN' && session?.user) {
+        supabase.auth.onAuthStateChange(function(event, session) {
+            if (event === 'SIGNED_IN' && session && session.user) {
                 loadUserProfile();
             }
             if (event === 'SIGNED_OUT') {
